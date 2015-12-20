@@ -16,20 +16,9 @@ var gulp            = require('gulp'),
     shell           = require('gulp-shell'),
     plumber         = require('gulp-plumber');
 
-gulp.task('browserSync', function() {
-    browserSync({
-        server: {
-            baseDir: "app/"
-        },
-        options: {
-            reloadDelay: 250
-        },
-        notify: false
-    });
-});
+var devUrl = 'http://htmlboilerplate.dev/';
 
-
-//compressing images & handle SVG files
+//compressing images
 gulp.task('images', function(tmp) {
     gulp.src(['app/assets/images/*.jpg', 'app/assets/images/*.png'])
         //prevent pipe breaking caused by errors from gulp plugins
@@ -38,7 +27,7 @@ gulp.task('images', function(tmp) {
         .pipe(gulp.dest('app/assets/images'));
 });
 
-//compressing images & handle SVG files
+//compressing images
 gulp.task('images-deploy', function() {
     gulp.src('app/assets/images/**/*')
         //prevent pipe breaking caused by errors from gulp plugins
@@ -61,7 +50,7 @@ gulp.task('scripts', function() {
                 //where we will store our finalized, compressed script
                 .pipe(gulp.dest('app/assets/scripts'))
                 //notify browserSync to refresh
-                .pipe(browserSync.reload({stream: true}));
+                .pipe(browserSync.stream());
 });
 
 //compiling our Javascripts for deployment
@@ -111,7 +100,7 @@ gulp.task('styles', function() {
                 //where to save our final, compressed css file
                 .pipe(gulp.dest('app/assets/styles'))
                 //notify browserSync to refresh
-                .pipe(browserSync.reload({stream: true}));
+                .pipe(browserSync.stream());
 });
 
 //compiling our SCSS files for deployment
@@ -137,19 +126,11 @@ gulp.task('styles-deploy', function() {
 });
 
 //basically just keeping an eye on all HTML files
-gulp.task('html', function() {
+gulp.task('htmlphp', function() {
     //watch any and all HTML files and refresh when something changes
-    return gulp.src('app/*.html')
+    return gulp.src('app/{*.php,*.html}')
         .pipe(plumber())
-        .pipe(browserSync.reload({stream: true}))
-        //catch errors
-        .on('error', gutil.log);
-});
-gulp.task('php', function() {
-    //watch any and all HTML files and refresh when something changes
-    return gulp.src('app/*.php')
-        .pipe(plumber())
-        .pipe(browserSync.reload({stream: true}))
+        .pipe(browserSync.stream())
         //catch errors
         .on('error', gutil.log);
 });
@@ -205,14 +186,27 @@ gulp.task('scaffold', function() {
 //  startup the web server,
 //  start up browserSync
 //  compress all scripts and SCSS files
-gulp.task('default', ['browserSync', 'scripts', 'styles'], function() {
+gulp.task('default', ['scripts', 'styles'], function() {
     //a list of watchers, so it will watch all of the following files waiting for changes
+
+    browserSync.init({
+        files: ['app/{lib,templates}/**/{*.php,*.html}', 'app/{*.php,*.html}'],
+        proxy: devUrl,
+        notify: false
+    });
+
     gulp.watch('app/assets/scripts/src/**', ['scripts']);
     gulp.watch('app/assets/styles/scss/**', ['styles']);
-    gulp.watch('app/assets/images/**', ['images']);
-    gulp.watch('app/*.html', ['html']);
-    gulp.watch('app/*.php', ['php']);
+    gulp.watch('app/assets/images/**/*', ['images']);
+    gulp.watch('app/{*.php,*.html}', ['htmlphp']);
 });
 
 //this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', gulpSequence('clean', 'scaffold', ['scripts-deploy', 'styles-deploy', 'images-deploy'], 'html-deploy'));
+gulp.task('deploy',
+          gulpSequence(
+                'clean',
+                'scaffold',
+                ['scripts-deploy', 'styles-deploy', 'images-deploy'],
+                'html-deploy'
+            )
+         );

@@ -1,10 +1,3 @@
-node_modules
-app/bower_components
-.sass-cache
-
-dist
-
-
 ## Windows
 Thumbs.db
 ehthumbs.db
@@ -19,3 +12,14 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
+
+
+/app/assets/scripts/app.js
+/app/assets/styles/stylesheet.css
+/app/bower_components/
+
+node_modules
+dist
+.sass-cache
+
+
