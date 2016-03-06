@@ -1,20 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Website Title</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php include_once('templates/head.php'); ?>
 
-        <link rel="stylesheet" href="assets/styles/stylesheet.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    </head>
     <body>
-
-        <!-- Add your site or application content here -->
-        <p>Hello</p>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -26,13 +14,8 @@
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
+        <?php include_once('templates/footer.php'); ?>
 
-
-        <script src="assets/scripts/app.js"></script>
-        <!--[if lt IE 9]>
-            <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
-        <![endif]-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
+
 </html>
