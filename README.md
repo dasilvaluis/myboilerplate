@@ -22,10 +22,13 @@ Front-end boilerplate with everything you need to get started.
 
 
 ### Using
-Development mode: 
+Run tasks once: 
 * `gulp`
 
-For deploynment: 
+Development:
+* `gulp watch`
+
+Deploynment: 
 * `gulp deploy`
 
 ### Notes
