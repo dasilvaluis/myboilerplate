@@ -13,11 +13,7 @@ Icon
 .Spotlight-V100
 .Trashes
 
-
-/app/assets/scripts/scripts.js
-/app/assets/styles/stylesheet.css
-/app/bower_components/
-
 node_modules
 .sass-cache
-/public
+/public/dist
+/public/bower_components/
