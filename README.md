@@ -5,9 +5,9 @@ Front-end boilerplate with everything you need to get started.
 
 ### Includes
 
-* Sass compiler
+* Sass compiler and minification
 * Autoprefixer
-* CSS and Javascript concatenation and compression
+* Javascript concatenation and compression
 * Image compression
 * Browsersync
 
@@ -18,20 +18,22 @@ Front-end boilerplate with everything you need to get started.
 * `npm install`
 * `npm install -g gulp`
 * `bower install`
-* Change devUrl var in the gulpfile.js file for your own project URL
+* Change devUrl var in the gulpfile.js file for your own virtualhost URL
 
 
 ### Using
+
 Run tasks once: 
 * `gulp`
 
-Development:
+Clean 'dist' folder:
+* `gulp clean`
+
+Refresh 'dist' folder:
+* `gulp refresh`
+
+Watch for changes:
 * `gulp watch`
 
-Deploynment: 
-* `gulp deploy`
-
-### Notes
-##### PHP Files
-
-The gulp script is ready to work with .html as well as .php files. However, if you change the `404.hmtl` to `404.php`, you must also change the reference `ErrorDocument` in the `.htaccess` file to `404.php` as well.
+Build for production: 
+* `gulp build`
