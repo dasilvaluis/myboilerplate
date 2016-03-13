@@ -12,30 +12,32 @@ var gulp            = require('gulp'),
     imagemin        = require('gulp-imagemin'),
     gulpSequence    = require('gulp-sequence').use(gulp),
     plumber         = require('gulp-plumber'),
-    clean           = require('gulp-clean');
+    clean           = require('gulp-clean'),
+    changed         = require('gulp-changed');
 
+var manifest = require('asset-builder')('./assets/manifest.json');
 
-var config = {
-        devURL: 'http://localhost/',
-		assetsFolder: 'assets',
-		publicFolder: 'src'
-	}
+var path = manifest.paths,
+    config = manifest.config || {},
+    globs = manifest.globs,
+    project = manifest.getProjectGlobs();
+
 
 gulp.task('images', function () {
-    gulp.src(config.AssetsFolder + '/images/**/{*.png,*.jpg,*.jpeg}')
+    gulp.src(config.assetsFolder + '/images/**/{*.png,*.jpg,*.jpeg}')
         .pipe(plumber())
         .pipe(gulp.dest(config.publicFolder + '/dist/images'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(config.AssetsFolder + '/fonts/**/*')
+    return gulp.src(config.assetsFolder + '/fonts/**/*')
         .pipe(plumber())
         .pipe(gulp.dest(config.publicFolder + '/dist/fonts' ));
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(config.AssetsFolder + '/scripts/**/*.js' )
+    return gulp.src(config.assetsFolder + '/scripts/**/*.js' )
         .pipe(plumber())
         .pipe(concat('scripts.js'))
         .on('error', gutil.log)
@@ -43,8 +45,8 @@ gulp.task('scripts', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles', function () {
-    return gulp.src(config.AssetsFolder + '/styles/main.scss' )
+gulp.task('styles', ['wiredep'], function () {
+    return gulp.src(config.assetsFolder + '/styles/main.scss' )
         .pipe(plumber({
           errorHandler: function (err) {
             console.log(err);
@@ -55,7 +57,7 @@ gulp.task('styles', function () {
         .pipe(sass({
               errLogToConsole: true,
               includePaths: [
-                  config.AssetsFolder + '/styles/'
+                  config.assetsFolder + '/styles/'
               ]
         }))
         .pipe(autoprefixer({
@@ -67,6 +69,17 @@ gulp.task('styles', function () {
         .pipe(sourceMaps.write())
         .pipe(gulp.dest(config.publicFolder + '/dist/styles') )
         .pipe(browserSync.stream());
+});
+
+
+gulp.task('wiredep', function() {
+  var wiredep = require('wiredep').stream;
+  return gulp.src(project.css)
+    .pipe(wiredep())
+    .pipe(changed(path.source + 'styles', {
+      hasChanged: changed.compareSha1Digest
+    }))
+    .pipe(gulp.dest(path.source + 'styles'));
 });
 
 
@@ -86,10 +99,10 @@ gulp.task('watch', ['default'], function() {
         notify: false
     });
 
-    gulp.watch(config.AssetsFolder + '/images/**/*', ['images']);
-    gulp.watch(config.AssetsFolder + '/fonts/**/*', ['fonts']);
-    gulp.watch(config.AssetsFolder + '/scripts/**/*', ['scripts']);
-    gulp.watch(config.AssetsFolder + '/styles/**/*', ['styles']);
+    gulp.watch(config.assetsFolder + '/images/**/*', ['images']);
+    gulp.watch(config.assetsFolder + '/fonts/**/*', ['fonts']);
+    gulp.watch(config.assetsFolder + '/scripts/**/*', ['scripts']);
+    gulp.watch(config.assetsFolder + '/styles/**/*', ['styles']);
 });
 
 gulp.task('build', ['default'], function() {
