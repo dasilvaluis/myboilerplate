@@ -1,6 +1,5 @@
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
-
 var gulp            = require('gulp'), 
     sass            = require('gulp-sass'),
     browserSync     = require('browser-sync'),
@@ -16,15 +15,18 @@ var gulp            = require('gulp'),
     clean           = require('gulp-clean');
 
 var devUrl = 'http://localhost/';
-var publicPath = 'public',
-    assetsFolder = 'assets';
-
 
 gulp.task('images', function () {
     gulp.src('assets/images/**/{*.png,*.jpg,*.jpeg}')
         .pipe(plumber())
         .pipe(gulp.dest('public/dist/images'))
         .pipe(browserSync.stream());
+});
+
+gulp.task('fonts', function () {
+    return gulp.src('assets/fonts/**/*')
+        .pipe(plumber())
+        .pipe(gulp.dest('public/dist/fonts'));
 });
 
 gulp.task('scripts', function () {
@@ -63,8 +65,29 @@ gulp.task('styles', function () {
 });
 
 
+gulp.task('clean', function () {
+	return gulp.src('public/dist', {read: false})
+		.pipe(clean());
+});
 
-gulp.task('deploy-files', ['images', 'scripts', 'styles'], function() {
+gulp.task('refresh', gulpSequence( 'clean', 'default' ))
+
+gulp.task('default', gulpSequence('images', 'fonts', 'scripts', 'styles') );
+
+gulp.task('watch', ['default'], function() {
+    browserSync.init({
+        files: ['public/**/*.html'],
+        proxy: devUrl,
+        notify: false
+    });
+
+    gulp.watch('assets/images/**/*', ['images']);
+    gulp.watch('assets/fonts/**/*', ['fonts']);
+    gulp.watch('assets/scripts/**/*', ['scripts']);
+    gulp.watch('assets/styles/**/*', ['styles']);
+});
+
+gulp.task('build', ['default'], function() {
 
     gulp.src( 'public/dist/images/**/{*.jpg,*.png}' )
         .pipe(plumber())
@@ -75,38 +98,14 @@ gulp.task('deploy-files', ['images', 'scripts', 'styles'], function() {
         }))
         .pipe(gulp.dest('public/assets/images'));
 
-
     gulp.src( 'public/dist/scripts/scripts.js' )
         .pipe(plumber())
         .pipe(uglify())
         .pipe(gulp.dest( 'public/dist/scripts' ));
 
-
     gulp.src( 'public/dist/styles/stylesheet.css' )
         .pipe(plumber())
         .pipe(minifyCSS())
         .pipe(gulp.dest( 'public/dist/styles' ));
+
 });
-
-gulp.task('clean', function () {
-	return gulp.src('public/dist', {read: false})
-		.pipe(clean());
-});
-
-gulp.task('refresh', gulpSequence( 'clean', 'default' ))
-
-gulp.task('default', gulpSequence('images', 'scripts', 'styles') );
-
-gulp.task('watch', ['images', 'scripts', 'styles'], function() {
-    browserSync.init({
-        files: ['public/**/*.html'],
-        proxy: devUrl,
-        notify: false
-    });
-
-    gulp.watch('assets/scripts/**/*', ['scripts']);
-    gulp.watch('assets/styles/**/*', ['styles']);
-    gulp.watch('assets/images/**/*', ['images']);
-});
-
-gulp.task('build', gulpSequence( 'deploy-files' ));
