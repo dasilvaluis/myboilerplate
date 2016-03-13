@@ -15,35 +15,35 @@ var gulp            = require('gulp'),
     shell           = require('gulp-shell'),
     plumber         = require('gulp-plumber');
 
-var devUrl = 'http://htmlboilerplate.dev/';
+var devUrl = 'http://localhost/';
 var devPath = 'app';
-var buildPath = 'dist';
+var buildPath = 'public';
 
 
 gulp.task('images', function () {
-    gulp.src('app/assets/images/**/{*.jpg,*.png}')
+    gulp.src(devPath + '/assets/images/**/{*.jpg,*.png}')
         .pipe(plumber())
         .pipe(imagemin({
             optimizationLevel: 5,
             progressive: true,
             interlaced: true
         }))
-        .pipe(gulp.dest('app/assets/images'))
+        .pipe(gulp.dest(devPath + '/assets/images'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', function () {
-    return gulp.src('app/assets/scripts/src/**/*.js')
+    return gulp.src(devPath + '/assets/scripts/src/**/*.js')
         .pipe(plumber())
         .pipe(concat('scripts.js'))
         .on('error', gutil.log)
         .pipe(uglify())
-        .pipe(gulp.dest('app/assets/scripts'))
+        .pipe(gulp.dest(devPath + '/assets/scripts'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('styles', function () {
-    return gulp.src('app/assets/styles/src/main.scss')
+    return gulp.src(devPath + '/assets/styles/src/main.scss')
         .pipe(plumber({
           errorHandler: function (err) {
             console.log(err);
@@ -54,7 +54,7 @@ gulp.task('styles', function () {
         .pipe(sass({
               errLogToConsole: true,
               includePaths: [
-                  'app/assets/styles/src/'
+                  devPath + '/assets/styles/src/'
               ]
         }))
         .pipe(autoprefixer({
@@ -64,58 +64,58 @@ gulp.task('styles', function () {
         .on('error', gutil.log)
         .pipe(concat('stylesheet.css'))
         .pipe(sourceMaps.write())
-        .pipe(gulp.dest('app/assets/styles'))
+        .pipe(gulp.dest(devPath + '/assets/styles'))
         .pipe(browserSync.stream());
 });
 
 
 
 gulp.task('deploy-files', ['images', 'scripts', 'styles'], function() {
-    gulp.src('app/*')
+    gulp.src(devPath + '/*')
         .pipe(plumber())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(buildPath));
 
-    gulp.src('app/.*')
+    gulp.src(devPath + '/.*')
         .pipe(plumber())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(buildPath));
 
 
-    gulp.src('app/assets/fonts/**/*')
+    gulp.src(devPath + '/assets/fonts/**/*')
         .pipe(plumber())
-        .pipe(gulp.dest('dist/assets/fonts'));
+        .pipe(gulp.dest(buildPath + '/assets/fonts'));
 
 
-    gulp.src('app/assets/images/**/*')
+    gulp.src(devPath + '/assets/images/**/*')
         .pipe(plumber())
-        .pipe(gulp.dest('dist/assets/images'));
+        .pipe(gulp.dest(buildPath + '/assets/images'));
 
 
-    gulp.src('app/assets/scripts/scripts.js')
+    gulp.src(devPath + '/assets/scripts/scripts.js')
         .pipe(plumber())
         .pipe(uglify())
-        .pipe(gulp.dest('dist/assets/scripts'));
+        .pipe(gulp.dest(buildPath + '/assets/scripts'));
 
 
-    gulp.src('app/assets/styles/stylesheet.css')
+    gulp.src(devPath + '/assets/styles/stylesheet.css')
         .pipe(plumber())
         .pipe(minifyCSS())
-        .pipe(gulp.dest('dist/assets/styles'));
+        .pipe(gulp.dest(buildPath + '/assets/styles'));
 });
 
 gulp.task('clean', function() {
     return shell.task([
-        'rm -r dist'
+        'rm -r' + buildPath
     ]);
 });
 
 gulp.task('scaffold', function() {
   return shell.task([
-      'mkdir dist',
-      'mkdir dist/assets',
-      'mkdir dist/assets/fonts',
-      'mkdir dist/assets/images',
-      'mkdir dist/assets/scripts',
-      'mkdir dist/assets/styles'
+      'mkdir ' + buildPath,
+      'mkdir ' + buildPath + '/assets',
+      'mkdir ' + buildPath + '/assets/fonts',
+      'mkdir ' + buildPath + '/assets/images',
+      'mkdir ' + buildPath + '/assets/scripts',
+      'mkdir ' + buildPath + '/assets/styles'
     ]);
 });
 
@@ -123,16 +123,17 @@ gulp.task('default', ['images', 'scripts', 'styles'], function() {});
 
 gulp.task('watch', ['images', 'scripts', 'styles'], function() {
     browserSync.init({
-        files: ['app/**/*.php', 'app/**/*.html'],
+        files: [devPath + '/**/*.php', devPath + '/**/*.html'],
         proxy: devUrl,
         notify: false
     });
 
-    gulp.watch('app/assets/scripts/src/**/*', ['scripts']);
-    gulp.watch('app/assets/styles/src/**/*', ['styles']);
-    gulp.watch('app/assets/images/**/*', ['images']);
+    gulp.watch(devPath + '/assets/scripts/src/**/*', ['scripts']);
+    gulp.watch(devPath + '/assets/styles/src/**/*', ['styles']);
+    gulp.watch(devPath + '/assets/images/**/*', ['images']);
 });
 
-gulp.task('deploy', gulpSequence(   'clean',  'scaffold',
+gulp.task('build', gulpSequence(    'clean',
+                                    'scaffold',
                                     'deploy-files'
                                 ));

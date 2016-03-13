@@ -19,6 +19,5 @@ Icon
 /app/bower_components/
 
 node_modules
-vendor
-dist
 .sass-cache
+/public
