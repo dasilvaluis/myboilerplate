@@ -11,30 +11,6 @@ Front-end boilerplate with everything you need to get started.
 * Image compression
 * Browsersync
 
-### Folder Structure
-
-.
-+-- assets
-|   +-- fonts
-|   +-- images
-|   +-- scripts
-|   +-- styles
-+-- public
-|   +-- .htaccess
-|   +-- 404.html
-|   +-- index.html
-|   +-- humans.txt
-|   +-- robots.txt
-|   +-- sitemap.xml
-|   +-- crossdomain.xml
-+-- .bowerrc
-+-- .editorconfig
-+-- bower.json
-+-- gulpfile.js
-+-- LICENSE
-+-- package.json
-+-- README.md
-
 ### Installation
 
 * Download/Clone repo
