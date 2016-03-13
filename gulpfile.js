@@ -14,32 +14,37 @@ var gulp            = require('gulp'),
     plumber         = require('gulp-plumber'),
     clean           = require('gulp-clean');
 
-var devUrl = 'http://localhost/';
+
+var config = {
+        devURL: 'http://localhost/',
+		assetsFolder: 'assets',
+		publicFolder: 'src'
+	}
 
 gulp.task('images', function () {
-    gulp.src('assets/images/**/{*.png,*.jpg,*.jpeg}')
+    gulp.src(config.AssetsFolder + '/images/**/{*.png,*.jpg,*.jpeg}')
         .pipe(plumber())
-        .pipe(gulp.dest('public/dist/images'))
+        .pipe(gulp.dest(config.publicFolder + '/dist/images'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('fonts', function () {
-    return gulp.src('assets/fonts/**/*')
+    return gulp.src(config.AssetsFolder + '/fonts/**/*')
         .pipe(plumber())
-        .pipe(gulp.dest('public/dist/fonts'));
+        .pipe(gulp.dest(config.publicFolder + '/dist/fonts' ));
 });
 
 gulp.task('scripts', function () {
-    return gulp.src('assets/scripts/**/*.js')
+    return gulp.src(config.AssetsFolder + '/scripts/**/*.js' )
         .pipe(plumber())
         .pipe(concat('scripts.js'))
         .on('error', gutil.log)
-        .pipe(gulp.dest('public/dist/scripts'))
+        .pipe(gulp.dest(config.publicFolder + '/dist/scripts' ))
         .pipe(browserSync.stream());
 });
 
 gulp.task('styles', function () {
-    return gulp.src('assets/styles/main.scss')
+    return gulp.src(config.AssetsFolder + '/styles/main.scss' )
         .pipe(plumber({
           errorHandler: function (err) {
             console.log(err);
@@ -50,7 +55,7 @@ gulp.task('styles', function () {
         .pipe(sass({
               errLogToConsole: true,
               includePaths: [
-                  'assets/styles/'
+                  config.AssetsFolder + '/styles/'
               ]
         }))
         .pipe(autoprefixer({
@@ -60,13 +65,13 @@ gulp.task('styles', function () {
         .on('error', gutil.log)
         .pipe(concat('stylesheet.css'))
         .pipe(sourceMaps.write())
-        .pipe(gulp.dest('public/dist/styles'))
+        .pipe(gulp.dest(config.publicFolder + '/dist/styles') )
         .pipe(browserSync.stream());
 });
 
 
 gulp.task('clean', function () {
-	return gulp.src('public/dist', {read: false})
+	return gulp.src(config.publicFolder + '/dist', {read: false} )
 		.pipe(clean());
 });
 
@@ -76,36 +81,36 @@ gulp.task('default', gulpSequence('images', 'fonts', 'scripts', 'styles') );
 
 gulp.task('watch', ['default'], function() {
     browserSync.init({
-        files: ['public/**/*.html'],
-        proxy: devUrl,
+        files: [config.publicFolder + '/**/*.html'],
+        proxy: config.devURL,
         notify: false
     });
 
-    gulp.watch('assets/images/**/*', ['images']);
-    gulp.watch('assets/fonts/**/*', ['fonts']);
-    gulp.watch('assets/scripts/**/*', ['scripts']);
-    gulp.watch('assets/styles/**/*', ['styles']);
+    gulp.watch(config.AssetsFolder + '/images/**/*', ['images']);
+    gulp.watch(config.AssetsFolder + '/fonts/**/*', ['fonts']);
+    gulp.watch(config.AssetsFolder + '/scripts/**/*', ['scripts']);
+    gulp.watch(config.AssetsFolder + '/styles/**/*', ['styles']);
 });
 
 gulp.task('build', ['default'], function() {
 
-    gulp.src( 'public/dist/images/**/{*.jpg,*.png}' )
+    gulp.src(config.publicFolder + '/dist/images/**/{*.jpg,*.png}' )
         .pipe(plumber())
         .pipe(imagemin({
             optimizationLevel: 5,
             progressive: true,
             interlaced: true
         }))
-        .pipe(gulp.dest('public/assets/images'));
+        .pipe(gulp.dest(config.publicFolder + '/assets/images' ));
 
-    gulp.src( 'public/dist/scripts/scripts.js' )
+    gulp.src(config.publicFolder + '/dist/scripts/scripts.js' )
         .pipe(plumber())
         .pipe(uglify())
-        .pipe(gulp.dest( 'public/dist/scripts' ));
+        .pipe(gulp.dest( config.publicFolder + '/dist/scripts' ));
 
-    gulp.src( 'public/dist/styles/stylesheet.css' )
+    gulp.src(config.publicFolder + '/dist/styles/stylesheet.css' )
         .pipe(plumber())
         .pipe(minifyCSS())
-        .pipe(gulp.dest( 'public/dist/styles' ));
+        .pipe(gulp.dest(config.publicFolder + '/dist/styles' ));
 
 });
