@@ -2,6 +2,7 @@ var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'oper
 
 var gulp            = require('gulp'), 
     sass            = require('gulp-sass'),
+    less            = require('gulp-less'),
     browserSync     = require('browser-sync'),
     autoprefixer    = require('gulp-autoprefixer'),
     uglify          = require('gulp-uglify'),
@@ -13,40 +14,50 @@ var gulp            = require('gulp'),
     gulpSequence    = require('gulp-sequence').use(gulp),
     plumber         = require('gulp-plumber'),
     clean           = require('gulp-clean'),
-    changed         = require('gulp-changed');
+    changed         = require('gulp-changed'),
+    flatten         = require('gulp-flatten'),
+    merge           = require('merge-stream');
 
 var manifest = require('asset-builder')('./assets/manifest.json');
 
 var path = manifest.paths,
-    config = manifest.config || {},
+    config = manifest.config,
     globs = manifest.globs,
     project = manifest.getProjectGlobs();
 
 
 gulp.task('images', function () {
-    gulp.src(config.assetsFolder + '/images/**/{*.png,*.jpg,*.jpeg}')
+    gulp.src(path.source + 'images/**/{*.png,*.jpg,*.jpeg}')
         .pipe(plumber())
-        .pipe(gulp.dest(config.publicFolder + '/dist/images'))
+        .pipe(gulp.dest(path.dist + 'images'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(config.assetsFolder + '/fonts/**/*')
-        .pipe(plumber())
-        .pipe(gulp.dest(config.publicFolder + '/dist/fonts' ));
-});
-
-gulp.task('scripts', function () {
-    return gulp.src(config.assetsFolder + '/scripts/**/*.js' )
-        .pipe(plumber())
-        .pipe(concat('scripts.js'))
-        .on('error', gutil.log)
-        .pipe(gulp.dest(config.publicFolder + '/dist/scripts' ))
+    return gulp.src(globs.fonts)
+        .pipe(flatten())
+        .pipe(gulp.dest(path.dist + 'fonts'))
         .pipe(browserSync.stream());
 });
 
+gulp.task('scripts', function () {
+    return gulp.src(path.source + 'scripts/**/*.js' )
+        .pipe(plumber())
+        .pipe(concat('scripts.js'))
+        .on('error', gutil.log)
+        .pipe(gulp.dest(path.dist + 'scripts' ))
+        .pipe(browserSync.stream());
+});
+
+
 gulp.task('styles', ['wiredep'], function () {
-    return gulp.src(config.assetsFolder + '/styles/main.scss' )
+
+    var cssStream = gulp.src(path.source + 'styles/**/*.css')
+        .pipe(sourceMaps.init())
+        .pipe(concat('css-files.css'))
+        .pipe(sourceMaps.write());
+
+    var sassStream = gulp.src(path.source + 'styles/main.scss' )
         .pipe(plumber({
           errorHandler: function (err) {
             console.log(err);
@@ -57,7 +68,7 @@ gulp.task('styles', ['wiredep'], function () {
         .pipe(sass({
               errLogToConsole: true,
               includePaths: [
-                  config.assetsFolder + '/styles/'
+                  path.source + 'styles/'
               ]
         }))
         .pipe(autoprefixer({
@@ -65,10 +76,15 @@ gulp.task('styles', ['wiredep'], function () {
            cascade:  true
         }))
         .on('error', gutil.log)
-        .pipe(concat('stylesheet.css'))
         .pipe(sourceMaps.write())
-        .pipe(gulp.dest(config.publicFolder + '/dist/styles') )
+        .pipe(concat('sass-files.css'));
+
+
+    return merge(sassStream, cssStream)
+        .pipe(concat('stylesheet.css'))
+        .pipe(gulp.dest(path.dist + 'styles') )
         .pipe(browserSync.stream());
+
 });
 
 
@@ -83,47 +99,44 @@ gulp.task('wiredep', function() {
 });
 
 
+gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
+
 gulp.task('clean', function () {
-	return gulp.src(config.publicFolder + '/dist', {read: false} )
+	return gulp.src(path.dist, {read: false} )
 		.pipe(clean());
 });
 
-gulp.task('refresh', gulpSequence( 'clean', 'default' ))
-
-gulp.task('default', gulpSequence('images', 'fonts', 'scripts', 'styles') );
-
 gulp.task('watch', ['default'], function() {
     browserSync.init({
-        files: [config.publicFolder + '/**/*.html'],
+        files: ['public/**/*.html'],
         proxy: config.devURL,
         notify: false
     });
 
-    gulp.watch(config.assetsFolder + '/images/**/*', ['images']);
-    gulp.watch(config.assetsFolder + '/fonts/**/*', ['fonts']);
-    gulp.watch(config.assetsFolder + '/scripts/**/*', ['scripts']);
-    gulp.watch(config.assetsFolder + '/styles/**/*', ['styles']);
+    gulp.watch(path.source + 'images/**/*', ['images']);
+    gulp.watch(path.source + 'fonts/**/*', ['fonts']);
+    gulp.watch(path.source + 'scripts/**/*', ['scripts']);
+    gulp.watch(path.source + 'styles/**/*', ['styles']);
 });
 
 gulp.task('build', ['default'], function() {
 
-    gulp.src(config.publicFolder + '/dist/images/**/{*.jpg,*.png}' )
+    gulp.src(path.dist + 'images/**/{*.jpg,*.png}' )
         .pipe(plumber())
         .pipe(imagemin({
             optimizationLevel: 5,
             progressive: true,
             interlaced: true
         }))
-        .pipe(gulp.dest(config.publicFolder + '/assets/images' ));
+        .pipe(gulp.dest(path.dist + 'images' ));
 
-    gulp.src(config.publicFolder + '/dist/scripts/scripts.js' )
+    gulp.src(path.dist + 'scripts/scripts.js' )
         .pipe(plumber())
         .pipe(uglify())
-        .pipe(gulp.dest( config.publicFolder + '/dist/scripts' ));
+        .pipe(gulp.dest( path.dist + 'scripts' ));
 
-    gulp.src(config.publicFolder + '/dist/styles/stylesheet.css' )
+    gulp.src(path.dist + 'styles/stylesheet.css' )
         .pipe(plumber())
         .pipe(minifyCSS())
-        .pipe(gulp.dest(config.publicFolder + '/dist/styles' ));
-
+        .pipe(gulp.dest(path.dist + 'styles' ));
 });
