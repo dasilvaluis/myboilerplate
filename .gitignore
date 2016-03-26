@@ -16,5 +16,5 @@ Icon
 node_modules
 bower_components
 .sass-cache
-/public/dist
+/public/assets
 /assets/scripts/vendor/bower

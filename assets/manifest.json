@@ -17,7 +17,7 @@
     },
     "paths": {
         "source": "assets/",
-        "dist": "public/dist/"
+        "dist": "public/assets/"
     },
     "config": {
         "devURL": "localhost"
