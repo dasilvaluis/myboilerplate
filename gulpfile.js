@@ -1,6 +1,6 @@
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
-var gulp            = require('gulp'), 
+var gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     less            = require('gulp-less'),
     browserSync     = require('browser-sync'),
@@ -34,8 +34,8 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(globs.fonts)
-        .pipe(flatten())
+    return gulp.src(config.assetsFolder + '/fonts/**/*')
+        .pipe(plumber())
         .pipe(gulp.dest(path.dist + 'fonts'))
         .pipe(browserSync.stream());
 });
@@ -79,7 +79,6 @@ gulp.task('styles', ['wiredep'], function () {
         .pipe(sourceMaps.write())
         .pipe(concat('sass-files.css'));
 
-
     return merge(sassStream, cssStream)
         .pipe(concat('stylesheet.css'))
         .pipe(gulp.dest(path.dist + 'styles') )
@@ -109,7 +108,7 @@ gulp.task('clean', function () {
 gulp.task('watch', ['default'], function() {
     browserSync.init({
         files: ['public/**/*.html'],
-        proxy: config.devURL,
+        proxy: config.devUrl,
         notify: false
     });
 
