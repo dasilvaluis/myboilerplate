@@ -1,5 +1,4 @@
-Front End Boilerplate
-==========================
+# My Boilerplate
 
 Front-end boilerplate with everything you need to get started.
 
@@ -7,18 +6,27 @@ Front-end boilerplate with everything you need to get started.
 
 * Sass compiler
 * Autoprefixer
-* CSS Javascript concatenation and compression
+* CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Downloads Bootstrap in SASS
+
+##### Bower dependencies
+* [Susy](http://susy.oddbird.net/)
+* [Normalize](https://necolas.github.io/normalize.css/)
+* [jQuery](https://jquery.com/)
+
+### Requirements
+
+* NodeJS
+* Gulp (globally installed)
+* Bower
 
 ### Install
 
-* Download/Clone repo
+* Download / Clone repo
 * `npm install`
-* `npm install -g gulp`
 * `bower install`
-* Change devURL in 'assets/manifest.json' for your own virtualhost URL
+* Change devUrl in 'assets/manifest.json' for your own virtualhost URL
 
 
 ### Use it
@@ -27,7 +35,7 @@ Run tasks once:
 
 * `gulp`
 
-Clean 'dist' folder:
+Clean 'public/assets' folder:
 
 * `gulp clean`
 
@@ -38,3 +46,12 @@ Watch for changes:
 Build for production: 
 
 * `gulp build`
+
+
+
+## Acknowledgements 
+
+This project is influenced by similar projects such as [Sage](https://roots.io/sage/), [HTML5 Boilerplate](https://html5boilerplate.com/), [Front-endboilerplate](http://frontendboilerplate.com/)
+
+## License
+MIT
