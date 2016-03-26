@@ -20,6 +20,6 @@
         "dist": "public/assets/"
     },
     "config": {
-        "devURL": "localhost"
+        "devUrl": "http://myboilerplate.dev/"
     }
 }
