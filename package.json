@@ -1,9 +1,9 @@
 {
-  "name": "myFrontEndBoilerPlate",
+  "name": "myBoilerPlate",
   "description": "A Boilerplate aimed to make the starting of simple projects easier and faster",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luismiguel-s/myFrontEndBoilerPlate"
+    "url": "https://github.com/luismiguel-s/myBoilerPlate"
   },
   "licence": "MIT",
   "licenses": [
