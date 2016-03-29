@@ -12,8 +12,10 @@ Front-end boilerplate with everything you need to get started.
 
 ##### Bower dependencies
 * [Susy](http://susy.oddbird.net/)
-* [Normalize](https://necolas.github.io/normalize.css/)
+* [Normalize.css](https://necolas.github.io/normalize.css/)
 * [jQuery](https://jquery.com/)
+* [Modernzir](https://modernizr.com/)
+* [Selectivizr](http://selectivizr.com/)
 
 ### Requirements
 
