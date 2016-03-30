@@ -14,7 +14,6 @@ Front-end boilerplate with everything you need to get started.
 * [Susy](http://susy.oddbird.net/)
 * [Normalize.css](https://necolas.github.io/normalize.css/)
 * [jQuery](https://jquery.com/)
-* [Modernzir](https://modernizr.com/)
 * [Selectivizr](http://selectivizr.com/)
 
 ### Requirements

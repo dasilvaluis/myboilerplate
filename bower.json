@@ -17,7 +17,6 @@
     "normalize-css": "^4.0.0",
     "susy": "^2.2.12",
     "jquery": "^2.2.2",
-    "modernizr": "^3.3.1",
     "selectivizr": "^1.0.2"
   }
 }
