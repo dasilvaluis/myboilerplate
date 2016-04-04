@@ -17,4 +17,7 @@ node_modules
 bower_components
 .sass-cache
 /public/assets
-/assets/scripts/vendor/bower
+/assets/scripts/vendor/
+/assets/styles/vendor/
+
+nbproject

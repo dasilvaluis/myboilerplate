@@ -27,14 +27,14 @@ var path = manifest.paths,
 
 
 gulp.task('images', function () {
-    gulp.src(path.source + 'images/**/{*.png,*.jpg,*.jpeg}')
+    gulp.src(path.source + 'images/**/{*.png,*.jpg,*.jpeg, *.gif}')
         .pipe(plumber())
         .pipe(gulp.dest(path.dist + 'images'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(config.assetsFolder + '/fonts/**/*')
+    return gulp.src(path.source + 'fonts/**/*')
         .pipe(plumber())
         .pipe(gulp.dest(path.dist + 'fonts'))
         .pipe(browserSync.stream());
@@ -97,6 +97,15 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(path.source + 'styles'));
 });
 
+//gulp.task('flatten', function() {
+//    gulp.src(['bower_components/**/*.css'])
+//        .pipe(flatten({ includeParents: 1} ))
+//        .pipe(gulp.dest(path.source + 'styles/vendor'));
+//
+//    gulp.src(['bower_components/**/*.js'])
+//        .pipe(flatten({ includeParents: 1} ))
+//        .pipe(gulp.dest(path.source + 'scripts/vendor'));
+//});
 
 gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
 
@@ -120,7 +129,7 @@ gulp.task('watch', ['default'], function() {
 
 gulp.task('build', ['default'], function() {
 
-    gulp.src(path.dist + 'images/**/{*.jpg,*.png}' )
+    gulp.src(path.dist + 'images/**/{*.png,*.jpg,*.jpeg, *.gif}' )
         .pipe(plumber())
         .pipe(imagemin({
             optimizationLevel: 5,
