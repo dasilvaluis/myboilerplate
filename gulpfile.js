@@ -27,7 +27,7 @@ var path = manifest.paths,
 
 
 gulp.task('images', function () {
-    gulp.src(path.source + 'images/**/{*.png,*.jpg,*.jpeg, *.gif}')
+    gulp.src(path.source + 'images/**/*')
         .pipe(plumber())
         .pipe(gulp.dest(path.dist + 'images'))
         .pipe(browserSync.stream());
@@ -40,14 +40,26 @@ gulp.task('fonts', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function () {
-    return gulp.src(path.source + 'scripts/**/*.js' )
-        .pipe(plumber())
-        .pipe(concat('scripts.js'))
-        .on('error', gutil.log)
-        .pipe(gulp.dest(path.dist + 'scripts' ))
-        .pipe(browserSync.stream());
+gulp.task('scripts', function() {
+    var merged = merge();
+    manifest.forEachDependency('js', function(dep) {
+    merged.add(
+      gulp.src(dep.globs, {base: 'scripts'})
+        .pipe(concat(dep.name))
+    );
+    });
+    return merged.pipe(gulp.dest(path.dist + 'scripts' ))
+    .pipe(browserSync.stream());
 });
+
+// gulp.task('scripts', function () {
+//     return gulp.src(path.source + 'scripts/**/*.js' )
+//         .pipe(plumber())
+//         .pipe(concat('scripts.js'))
+//         .on('error', gutil.log)
+//         .pipe(gulp.dest(path.dist + 'scripts' ))
+//         .pipe(browserSync.stream());
+// });
 
 
 gulp.task('styles', ['wiredep'], function () {
@@ -97,16 +109,6 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(path.source + 'styles'));
 });
 
-//gulp.task('flatten', function() {
-//    gulp.src(['bower_components/**/*.css'])
-//        .pipe(flatten({ includeParents: 1} ))
-//        .pipe(gulp.dest(path.source + 'styles/vendor'));
-//
-//    gulp.src(['bower_components/**/*.js'])
-//        .pipe(flatten({ includeParents: 1} ))
-//        .pipe(gulp.dest(path.source + 'scripts/vendor'));
-//});
-
 gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
 
 gulp.task('clean', function () {
@@ -138,7 +140,7 @@ gulp.task('build', ['default'], function() {
         }))
         .pipe(gulp.dest(path.dist + 'images' ));
 
-    gulp.src(path.dist + 'scripts/scripts.js' )
+    gulp.src(path.dist + 'scripts/**/*.js' )
         .pipe(plumber())
         .pipe(uglify())
         .pipe(gulp.dest( path.dist + 'scripts' ));

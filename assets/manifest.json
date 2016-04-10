@@ -1,18 +1,19 @@
 {
     "dependencies": {
         "main.js": {
+            "vendor": [
+                "../bower_components/jquery/dist/jquery.min.js"
+            ],
             "files": [
-                "scripts/**/*.js",
                 "scripts/main.js"
             ],
             "main": true
         },
         "main.css": {
-            "files": ["styles/main.scss"],
+            "files": [
+              "styles/main.scss"
+            ],
             "main": true
-        },
-        "jquery.js": {
-            "bower": ["jquery"]
         }
     },
     "paths": {
@@ -20,6 +21,6 @@
         "dist": "public/assets/"
     },
     "config": {
-        "devUrl": "http://myboilerplate.dev/"
+        "devUrl": "myboilerplate.dev/"
     }
 }
