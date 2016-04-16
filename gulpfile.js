@@ -46,6 +46,7 @@ gulp.task('scripts', function() {
     merged.add(
       gulp.src(dep.globs, {base: 'scripts'})
         .pipe(concat(dep.name))
+        .on('error', gutil.log)
     );
     });
     return merged.pipe(gulp.dest(path.dist + 'scripts' ))
