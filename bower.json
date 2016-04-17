@@ -1,6 +1,6 @@
 {
-  "name": "htmlboilerplate",
-  "description": "htmlboilerplate",
+  "name": "myboilerplate",
+  "description": "myboilerplate",
   "main": "index.html",
   "authors": [
     "Luis Miguel <luismiguel.s91@gmail.com>"
@@ -10,7 +10,7 @@
     "HTML5",
     "boilerplate"
   ],
-  "homepage": "https://github.com/luismiguel-s/myHTMLBoilerPlate",
+  "homepage": "https://github.com/luism-s/myBoilerPlate",
   "moduleType": [],
   "private": true,
   "dependencies": {
