@@ -3,7 +3,6 @@
 Simple front-end boilerplate with everything needed fto develop simple web pages/web apps
 
 ## Features
--------
 
 ### Includes
 
@@ -27,7 +26,6 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
 * [Selectivizr](http://selectivizr.com/)
 
 ## Install
--------
 
 ### Requirements
 
@@ -45,7 +43,6 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
 
 
 ## Use it
--------
 
 Run tasks once: 
 * `gulp`
@@ -64,14 +61,14 @@ List all gulp commands:
 
 
 ## Acknowledgements 
--------
+
 This project is influenced by similar projects such as:
 * [Sage](https://roots.io/sage/)
 * [HTML5 Boilerplate](https://html5boilerplate.com/)
 * [Front-endboilerplate](http://frontendboilerplate.com/)
 
 ## License
--------
+
 The MIT License (MIT)
 
 Copyright (c) 2016
