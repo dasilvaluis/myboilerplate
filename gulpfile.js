@@ -19,10 +19,9 @@ var gulp            = require('gulp'),
     merge           = require('merge-stream'),
     gulpif          = require('gulp-if'),
     manifest        = require('asset-builder')('./assets/manifest.json'),
-    dotenv = require('dotenv').config();
+    dotenv          = require('dotenv').config();
 
 var path = manifest.paths,
-    config = manifest.config,
     globs = manifest.globs,
     project = manifest.getProjectGlobs();
 
