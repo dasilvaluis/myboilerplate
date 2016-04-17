@@ -39,7 +39,7 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
 * `npm install`
 * `bower install`
 * Copy the `.env.example` file to a new file and name it `.env`
-* Open the `.env` file and change DEV_URL for your own virtualhost URL
+* Open the `.env` file and change `DEV_URL` variable value for your own virtualhost URL
 
 
 ## Use it
