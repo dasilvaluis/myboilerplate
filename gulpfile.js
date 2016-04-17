@@ -6,7 +6,7 @@ var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     autoprefixer    = require('gulp-autoprefixer'),
     uglify          = require('gulp-uglify'),
-    minifyCSS       = require('gulp-minify-css'),
+    cssnano         = require('gulp-cssnano'),
     gutil           = require('gulp-util'),
     concat          = require('gulp-concat'),
     sourceMaps      = require('gulp-sourcemaps'),
@@ -16,7 +16,8 @@ var gulp            = require('gulp'),
     clean           = require('gulp-clean'),
     changed         = require('gulp-changed'),
     flatten         = require('gulp-flatten'),
-    merge           = require('merge-stream');
+    merge           = require('merge-stream'),
+    gulpif          = require('gulp-if');
 
 var manifest = require('asset-builder')('./assets/manifest.json');
 
@@ -49,56 +50,38 @@ gulp.task('scripts', function() {
         .on('error', gutil.log)
     );
     });
-    return merged.pipe(gulp.dest(path.dist + 'scripts' ))
-    .pipe(browserSync.stream());
+    return merged
+                .pipe(gulp.dest(path.dist + 'scripts' ))
+                .pipe(browserSync.stream());
 });
 
-// gulp.task('scripts', function () {
-//     return gulp.src(path.source + 'scripts/**/*.js' )
-//         .pipe(plumber())
-//         .pipe(concat('scripts.js'))
-//         .on('error', gutil.log)
-//         .pipe(gulp.dest(path.dist + 'scripts' ))
-//         .pipe(browserSync.stream());
-// });
-
-
-gulp.task('styles', ['wiredep'], function () {
-
-    var cssStream = gulp.src(path.source + 'styles/**/*.css')
-        .pipe(sourceMaps.init())
-        .pipe(concat('css-files.css'))
-        .pipe(sourceMaps.write());
-
-    var sassStream = gulp.src(path.source + 'styles/main.scss' )
-        .pipe(plumber({
-          errorHandler: function (err) {
-            console.log(err);
-            this.emit('end');
-          }
-        }))
-        .pipe(sourceMaps.init())
-        .pipe(sass({
-              errLogToConsole: true,
-              includePaths: [
-                  path.source + 'styles/'
-              ]
-        }))
-        .pipe(autoprefixer({
-           browsers: autoPrefixBrowserList,
-           cascade:  true
-        }))
-        .on('error', gutil.log)
-        .pipe(sourceMaps.write())
-        .pipe(concat('sass-files.css'));
-
-    return merge(sassStream, cssStream)
-        .pipe(concat('stylesheet.css'))
-        .pipe(gulp.dest(path.dist + 'styles') )
-        .pipe(browserSync.stream());
-
+gulp.task('styles', function() {
+  var merged = merge();
+  manifest.forEachDependency('css', function(dep) {
+    merged.add(
+        gulp.src(dep.globs, {base: 'styles'})
+            .pipe(sourceMaps.init())
+            .pipe(gulpif('*.less', less()))
+            .pipe(gulpif('*.scss', 
+                sass({
+                    errLogToConsole: true,
+                    includePaths: ['.']
+                })
+            ))
+            .pipe(autoprefixer({
+                browsers: autoPrefixBrowserList,
+                cascade:  true
+            }))
+            .on('error', gutil.log)
+            .pipe(sourceMaps.write())
+            .pipe(concat(dep.name))
+    
+    );
+  });
+  return merged
+            .pipe(gulp.dest(path.dist + 'styles' ))
+            .pipe(browserSync.stream());
 });
-
 
 gulp.task('wiredep', function() {
   var wiredep = require('wiredep').stream;
@@ -110,7 +93,7 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(path.source + 'styles'));
 });
 
-gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
+gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'wiredep', 'styles') );
 
 gulp.task('clean', function () {
 	return gulp.src(path.dist, {read: false} )
@@ -119,7 +102,7 @@ gulp.task('clean', function () {
 
 gulp.task('watch', ['default'], function() {
     browserSync.init({
-        files: ['public/**/*.html'],
+        files: ['public/**/*.php'],
         proxy: config.devUrl,
         notify: false
     });
@@ -132,7 +115,7 @@ gulp.task('watch', ['default'], function() {
 
 gulp.task('build', ['default'], function() {
 
-    gulp.src(path.dist + 'images/**/{*.png,*.jpg,*.jpeg, *.gif}' )
+    gulp.src(path.dist + 'images/**/*' )
         .pipe(plumber())
         .pipe(imagemin({
             optimizationLevel: 5,
@@ -146,8 +129,8 @@ gulp.task('build', ['default'], function() {
         .pipe(uglify())
         .pipe(gulp.dest( path.dist + 'scripts' ));
 
-    gulp.src(path.dist + 'styles/stylesheet.css' )
+    gulp.src(path.dist + 'styles/**/*.css' )
         .pipe(plumber())
-        .pipe(minifyCSS())
+        .pipe(cssnano())
         .pipe(gulp.dest(path.dist + 'styles' ));
 });

@@ -18,5 +18,21 @@
     "susy": "^2.2.12",
     "jquery": "^2.2.2",
     "selectivizr": "^1.0.2"
+  },
+  
+  "overrides": {
+    "jquery": {
+      "main": [
+        "./dist/jquery.min.js"
+      ]
+    },
+    "normalize-css": {
+      "main": [
+        "./normalize.css"
+      ]
+    },
+    "selectivizr": {
+      "main": []
+    }
   }
 }

@@ -1,9 +1,6 @@
 {
     "dependencies": {
         "main.js": {
-            "vendor": [
-                "../bower_components/jquery/dist/jquery.min.js"
-            ],
             "files": [
                 "scripts/main.js"
             ],
