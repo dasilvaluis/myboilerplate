@@ -21,3 +21,7 @@ bower_components
 /assets/styles/vendor/
 
 nbproject
+
+.env
+.env*
+!.env.example

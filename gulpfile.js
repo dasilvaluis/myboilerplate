@@ -17,9 +17,9 @@ var gulp            = require('gulp'),
     changed         = require('gulp-changed'),
     flatten         = require('gulp-flatten'),
     merge           = require('merge-stream'),
-    gulpif          = require('gulp-if');
-
-var manifest = require('asset-builder')('./assets/manifest.json');
+    gulpif          = require('gulp-if'),
+    manifest        = require('asset-builder')('./assets/manifest.json'),
+    dotenv = require('dotenv').config();
 
 var path = manifest.paths,
     config = manifest.config,
@@ -103,7 +103,7 @@ gulp.task('clean', function () {
 gulp.task('watch', ['default'], function() {
     browserSync.init({
         files: ['public/**/*.php'],
-        proxy: config.devUrl,
+        proxy: process.env.DEV_URL,
         notify: false
     });
 

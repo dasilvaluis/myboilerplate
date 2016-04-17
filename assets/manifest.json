@@ -16,8 +16,5 @@
     "paths": {
         "source": "assets/",
         "dist": "public/assets/"
-    },
-    "config": {
-        "devUrl": "myboilerplate.dev/"
     }
 }
