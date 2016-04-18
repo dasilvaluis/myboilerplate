@@ -19,6 +19,46 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
 * Automatically inject JS, CSS/SASS from bower
 * Ability to manage dependencies in Asset Builder file, `assets/manifest.json`
 
+### File structure
+    .
+    ├── assets
+    │   ├── fonts
+    │   ├── images
+    │   ├── manifest.json
+    │   ├── scripts
+    │   │   └── main.js
+    │   └── styles
+    │       ├── components
+    │       │   ├── _buttons.scss
+    │       │   └── _forms.scss
+    │       ├── config
+    │       │   ├── _media.scss
+    │       │   ├── _mixins.scss
+    │       │   ├── _overrides.scss
+    │       │   └── _variables.scss
+    │       ├── layout
+    │       │   ├── _footer.scss
+    │       │   └── _header.scss
+    │       ├── main.scss
+    │       └── pages
+    ├── bower.json
+    ├── gulpfile.js
+    ├── LICENSE
+    ├── package.json
+    ├── public
+    │   ├── 404.html
+    │   ├── assets
+    │   │   ├── scripts
+    │   │   │   └── main.js
+    │   │   └── styles
+    │   │       └── main.css
+    │   ├── crossdomain.xml
+    │   ├── humans.txt
+    │   ├── index.html
+    │   ├── robots.txt
+    │   └── sitemap.xml
+    ├── README.md
+
 ### Bower dependencies
 * [Susy](http://susy.oddbird.net/)
 * [Normalize.css](https://necolas.github.io/normalize.css/)
