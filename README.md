@@ -47,11 +47,6 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
     ├── package.json
     ├── public
     │   ├── 404.html
-    │   ├── assets
-    │   │   ├── scripts
-    │   │   │   └── main.js
-    │   │   └── styles
-    │   │       └── main.css
     │   ├── crossdomain.xml
     │   ├── humans.txt
     │   ├── index.html
