@@ -101,7 +101,7 @@ gulp.task('clean', function () {
 
 gulp.task('watch', ['default'], function() {
     browserSync.init({
-        files: ['public/**/*.php'],
+        files: ['public/**/*.html'],
         proxy: process.env.DEV_URL,
         notify: false
     });
