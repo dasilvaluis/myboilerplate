@@ -66,37 +66,48 @@ Simple front-end boilerplate with everything needed fto develop simple web pages
 
 ### Install
 
-* Download / Clone repo
-    git clone https://github.com/luism-s/myBoilerplate.git
+Download / Clone repo and CD into the created folder
+
+    $ git clone https://github.com/luism-s/myBoilerplate.git projectname 
     
-* Install Node dependencies
-    npm install
+    $ cd projectname/
     
-* Install Bower dependencies
-    bower install
+Install Node dependencies
+
+    $ npm install
     
-* Copy the `.env.example` file to a new file and name it `.env`
-    cp .env.example .env
+Install Bower dependencies
+
+    $ bower install
     
-* Open the `.env` file and change `DEV_URL` variable value for your own virtualhost URL (ex: mysupernewsite.local)
+Copy the `.env.example` file to a new file and name it `.env`
+
+    $ cp .env.example .env
+    
+Open the `.env` file and change `DEV_URL` variable value for your own virtualhost URL (ex: mysupernewsite.local)
 
 
 ## Use it
 
 Run tasks once: 
-    gulp
+
+    $ gulp
 
 Clean 'public/assets' folder:
-    gulp clean
+
+    $ gulp clean
 
 Watch for changes:
-    gulp watch
+
+    $ gulp watch
 
 Build for production: 
-    gulp build
+
+    $ gulp build
 
 List all gulp commands:
-    gulp -T
+
+    $ gulp -T
 
 
 ## Acknowledgements 
