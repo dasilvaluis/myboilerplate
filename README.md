@@ -18,26 +18,26 @@ Simple front-end boilerplate with everything needed to start the development of 
 
     .
     ├── assets
-    │   ├── fonts
-    │   ├── images
-    │   ├── manifest.json
-    │   ├── scripts
-    │   │   └── main.js
-    │   └── styles
-    │       ├── base
-    │       │   ├── _general.scss
-    │       │   ├── _grid.scss
-    │       │   ├── _mixins.scss
-    │       │   └── _variables.scss
-    │       ├── components
-    │       │   ├── _buttons.scss
-    │       │   ├── _fonts.scss
-    │       │   └── _forms.scss
-    │       ├── layout
-    │       │   ├── _footer.scss
-    │       │   ├── _header.scss
-    │       │   └── _sections.scss
-    │       └── main.scss
+    │   ├── fonts
+    │   ├── images
+    │   ├── manifest.json
+    │   ├── scripts
+    │   │   └── main.js
+    │   └── styles
+    │       ├── base
+    │       │   ├── _general.scss
+    │       │   ├── _grid.scss
+    │       │   ├── _mixins.scss
+    │       │   └── _variables.scss
+    │       ├── components
+    │       │   ├── _buttons.scss
+    │       │   ├── _fonts.scss
+    │       │   └── _forms.scss
+    │       ├── layout
+    │       │   ├── _footer.scss
+    │       │   ├── _header.scss
+    │       │   └── _sections.scss
+    │       └── main.scss
     ├── bower.json
     ├── gulpfile.js
     ├── package.json
