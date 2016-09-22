@@ -1,6 +1,6 @@
 # My Boilerplate
 
-Simple front-end boilerplate with everything needed fto develop simple web pages/web apps
+Simple front-end boilerplate with everything needed to start the development of simple web pages/web apps
 
 ## Features
 
