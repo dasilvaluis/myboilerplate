@@ -1,0 +1,68 @@
+$susy: (
+  columns: 12,
+  gutters: .25
+);
+
+.container {
+    
+    &, &-xs, &-sm, &-md, &-lg {
+        @include container;
+        width: $container-width;
+    }
+    &-xs {
+        @include max-xs {
+            width: 100%;
+        }
+    }
+    &-sm {
+        @include max-sm {
+            width: 100%;
+        }
+    }
+    &-md {
+        @include max-md {
+            width: 100%;
+        }
+    }
+    &-lg {
+        @include max-lg {
+            width: 100%;
+        }
+    }
+}
+
+@for $colWidth from 1 to 12 {
+    .col-#{$colWidth} {
+        &, &-xs, &-sm, &-md, &-lg {
+            @include span($colWidth of 12);
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &-xs {
+            @include max-xs {
+                margin-right: 0;
+                @include span(12 of 12); 
+            }
+        }
+        &-sm {
+            @include max-sm {
+                margin-right: 0;
+                @include span(12 of 12); 
+            }
+        }
+        &-md {
+            @include max-md {
+                margin-right: 0;
+                @include span(12 of 12); 
+            }
+        }
+        &-lg {
+            @include max-lg {
+                margin-right: 0;
+                @include span(12 of 12); 
+            }
+        }
+    }
+}
