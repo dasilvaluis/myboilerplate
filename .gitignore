@@ -15,10 +15,12 @@ Icon
 
 node_modules
 bower_components
+/vendor/
 .sass-cache
 /public/assets
 
 nbproject
+.vscode
 
 .env
 .env*
