@@ -10,3 +10,44 @@
         clear: both;
     }
 }
+
+@mixin min-lg {
+    @media (min-width: $lg-breakpoint) {
+        @content;
+    }
+}
+@mixin max-lg {
+    @media (max-width: $lg-breakpoint) {
+        @content;
+    }
+}
+@mixin min-md {
+    @media (min-width: $md-breakpoint) {
+        @content;
+    }
+}
+@mixin max-md {
+    @media (max-width: $md-breakpoint) {
+        @content;
+    }
+}
+@mixin min-sm {
+    @media (min-width: $sm-breakpoint) {
+        @content;
+    }
+}
+@mixin max-sm {
+    @media (max-width: $sm-breakpoint) {
+        @content;
+    }
+}
+@mixin min-xs {
+    @media (min-width: $xs-breakpoint) {
+        @content;
+    }
+}
+@mixin max-xs {
+    @media (max-width: $xs-breakpoint) {
+        @content;
+    }
+}
