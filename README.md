@@ -53,7 +53,6 @@ Simple front-end boilerplate with everything needed to start the development of 
 ### Bower dependencies
 * [Susy](http://susy.oddbird.net/)
 * [Normalize.css](https://necolas.github.io/normalize.css/)
-* [jQuery](https://jquery.com/)
 * [Selectivizr](http://selectivizr.com/)
 
 ## Install
