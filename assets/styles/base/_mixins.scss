@@ -1,0 +1,85 @@
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin max-xs {
+    @media (max-width: $xs-breakpoint) {
+        @content;
+    }
+}
+@mixin min-xs {
+    @media (min-width: $xs-breakpoint) {
+        @content;
+    }
+}
+@mixin max-sm {
+    @media (max-width: $sm-breakpoint) {
+        @content;
+    }
+}
+@mixin min-sm {
+    @media (min-width: $sm-breakpoint) {
+        @content;
+    }
+}
+@mixin max-md {
+    @media (max-width: $md-breakpoint) {
+        @content;
+    }
+}
+@mixin min-md {
+    @media (min-width: $md-breakpoint) {
+        @content;
+    }
+}
+@mixin min-lg {
+    @media (min-width: $lg-breakpoint) {
+        @content;
+    }
+}
+@mixin max-lg {
+    @media (max-width: $lg-breakpoint) {
+        @content;
+    }
+}
+@mixin min-xl {
+    @media (min-width: $xl-breakpoint) {
+        @content;
+    }
+}
+@mixin max-xl {
+    @media (max-width: $xl-breakpoint) {
+        @content;
+    }
+}
+
+
+@mixin xs-sm {
+    @media (min-width: $xs-breakpoint) and (max-width: $sm-breakpoint) {
+        @content;
+    }
+}
+@mixin sm-md {
+    @media (min-width: $sm-breakpoint) and (max-width: $md-breakpoint) {
+        @content;
+    }
+}
+@mixin md-lg {
+    @media (min-width: $lg-breakpoint) and (max-width: $lg-breakpoint) {
+        @content;
+    }
+}
+@mixin lg-xl {
+    @media (min-width: $lg-breakpoint) and (max-width: $xl-breakpoint) {
+        @content;
+    }
+}

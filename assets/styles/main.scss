@@ -3,9 +3,9 @@
 // endbower
 
 @import 'config/variables';
-@import 'config/mixins';
+@import 'config/general';
 
-@import 'base/general';
+@import 'base/mixins';
 @import 'base/fonts';
 @import 'base/grid';
 @import 'base/media';
