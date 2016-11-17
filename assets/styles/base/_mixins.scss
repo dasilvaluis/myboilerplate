@@ -11,6 +11,9 @@
     }
 }
 
+
+// MEDIA MIXINS
+
 @mixin max-xs {
     @media (max-width: $xs-breakpoint) {
         @content;
