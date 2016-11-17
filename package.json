@@ -29,6 +29,7 @@
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
+    "gulp-uncss": "^1.0.6",
     "merge-stream": "^1.0.0",
     "wiredep": "^3.0.0"
   }

@@ -16,7 +16,8 @@ var gulp            = require('gulp'),
     merge           = require('merge-stream'),
     manifest        = require('asset-builder')('./assets/manifest.json'),
     dotenv          = require('dotenv').config(),
-    notify          = require("gulp-notify");
+    notify          = require("gulp-notify"),
+    uncss           = require('gulp-uncss');
 
 var path = manifest.paths,
     globs = manifest.globs,
