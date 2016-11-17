@@ -4,15 +4,18 @@ Simple front-end boilerplate with everything needed to start the development of 
 
 ## Features
 
-* SASS and LESS compiler
+* SCSS compiler
 * Autoprefixer
 * CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Automatically inject JS, CSS/SASS from bower using Asset Builder
+* Automatically inject JS, CSS/SASS from bower using Assets Builder
 * Ability to manage dependencies in Asset Builder file, `assets/manifest.json`
+* 10-column grid system
+* Media query mixins 
 
-### File structure
+### Project file structure
+
     .
     ├── assets
     │   ├── fonts
@@ -22,33 +25,29 @@ Simple front-end boilerplate with everything needed to start the development of 
     │   │   └── main.js
     │   └── styles
     │       ├── base
-    │       │   ├── _fonts.scss
     │       │   ├── _general.scss
     │       │   ├── _grid.scss
-    │       │   └── _media.scss
-    │       ├── components
-    │       │   └── _buttons.scss
-    │       ├── config
     │       │   ├── _mixins.scss
     │       │   └── _variables.scss
+    │       ├── components
+    │       │   ├── _buttons.scss
+    │       │   ├── _fonts.scss
+    │       │   └── _forms.scss
     │       ├── layout
     │       │   ├── _footer.scss
     │       │   ├── _header.scss
     │       │   └── _sections.scss
-    │       ├── main.scss
-    │       └── pages
+    │       └── main.scss
     ├── bower.json
     ├── gulpfile.js
-    ├── LICENSE
     ├── package.json
-    ├── public
-    │   ├── 404.html
-    │   ├── crossdomain.xml
-    │   ├── humans.txt
-    │   ├── index.html
-    │   ├── robots.txt
-    │   └── sitemap.xml
-    ├── README.md
+    └── public
+        ├── .htaccess
+        ├── 404.html
+        ├── humans.txt
+        ├── index.html
+        └── robots.txt
+
 
 ### Bower dependencies
 * [Susy](http://susy.oddbird.net/)
