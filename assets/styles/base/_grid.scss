@@ -1,8 +1,16 @@
-$susy: (
-  columns: 12,
-  gutters: .25
-);
+$nColumns: 10;
+$gutter: 0.05;
 
+@function grid-width($size, $has-gutter:false) {
+  
+    @if $has-gutter {
+        @return calc( (1 - #{$gutter}) * (100% / #{$nColumns}) * #{$size} );  
+    }
+    @else {
+        @return calc( (100% / #{$nColumns}) * #{$size} );
+    }
+  
+}
 .container {
     
     &, &-xs, &-sm, &-md, &-lg, &-xl {
@@ -39,40 +47,32 @@ $susy: (
 @for $colWidth from 1 to 12 {
     .col-#{$colWidth} {
         &, &-xs, &-sm, &-md, &-lg, &-xl {
-            @include span($colWidth);
-            &.last {
-                margin-right: 0;
-            }
+            width: grid-width($colWidth, true);
         }
 
         &-xs {
             @media (max-width: $xs-breakpoint) {
-                margin-right: 0;
-                @include span(12 last); 
+                width: grid-width($colWidth); 
             }
         }
         &-sm {
             @media (max-width: $sm-breakpoint) {
-                margin-right: 0;
-                @include span(12 last); 
+                width: grid-width($colWidth);
             }
         }
         &-md {
             @media (max-width: $md-breakpoint) {
-                margin-right: 0;
-                @include span(12 last); 
+                width: grid-width($colWidth); 
             }
         }
         &-lg {
             @media (min-width: $lg-breakpoint) {
-                margin-right: 0;
-                @include span(12 last); 
+                width: grid-width($colWidth);
             }
         }
         &-xl {
             @media (min-width: $xl-breakpoint) {
-                margin-right: 0;
-                @include span(12 last); 
+                width: grid-width($colWidth);
             }
         }
     }
