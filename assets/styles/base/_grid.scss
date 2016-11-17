@@ -11,6 +11,10 @@ $gutter: 0.05;
     }
   
 }
+@mixin grid($size, $has-gutter:false){
+    width: grid-width($size, $has-gutter);
+    margin: 0 ($gutter/2)*100%;
+}
 .container {
     
     &, &-xs, &-sm, &-md, &-lg, &-xl {
@@ -47,32 +51,33 @@ $gutter: 0.05;
 @for $colWidth from 1 to 12 {
     .col-#{$colWidth} {
         &, &-xs, &-sm, &-md, &-lg, &-xl {
-            width: grid-width($colWidth, true);
+            @include grid($colWidth, true);
+
         }
 
         &-xs {
             @media (max-width: $xs-breakpoint) {
-                width: grid-width($colWidth); 
+                @include grid($nColumns);
             }
         }
         &-sm {
             @media (max-width: $sm-breakpoint) {
-                width: grid-width($colWidth);
+                @include grid($nColumns);
             }
         }
         &-md {
             @media (max-width: $md-breakpoint) {
-                width: grid-width($colWidth); 
+                @include grid($nColumns);
             }
         }
         &-lg {
             @media (min-width: $lg-breakpoint) {
-                width: grid-width($colWidth);
+                @include grid($nColumns);
             }
         }
         &-xl {
             @media (min-width: $xl-breakpoint) {
-                width: grid-width($colWidth);
+                @include grid($nColumns);
             }
         }
     }
