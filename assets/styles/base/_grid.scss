@@ -1,82 +1,58 @@
 $nColumns: 10;
 $gutter: 0.05;
 
-@function grid-width($size, $has-gutter:false) {
-  
+@mixin grid($size, $has-gutter:false){
     @if $has-gutter {
-        @return calc( (1 - #{$gutter}) * (100% / #{$nColumns}) * #{$size} );  
+        width: calc( (1 - #{$gutter}) * (100% / #{$nColumns}) * #{$size} );
+        margin: 0 ($gutter/2)*100%;
     }
     @else {
-        @return calc( (100% / #{$nColumns}) * #{$size} );
+        width: calc( (100% / #{$nColumns}) * #{$size} );
     }
-  
-}
-@mixin grid($size, $has-gutter:false){
-    width: grid-width($size, $has-gutter);
-    margin: 0 ($gutter/2)*100%;
 }
 .container {
-    
-    &, &-xs, &-sm, &-md, &-lg, &-xl {
-        @include container;
-        width: 75%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:after {
+        content: " ";
+        display: block;
+        clear: both; 
     }
-    &-xs {
-        @media (max-width: $xs-breakpoint) {
-            width: 100%;
-        }
+    @include max-md {
+       width: 100%; 
     }
-    &-sm {
-        @media (max-width: $sm-breakpoint) {
-            width: 100%;
-        }
+    @include md-lg {
+        width: 900px;
     }
-    &-md {
-        @media (max-width: $md-breakpoint) {
-            width: 100%;
-        }
-    }
-    &-lg {
-        @media (min-width: $lg-breakpoint) {
-            width: 100%;
-        }
-    }
-    &-xl {
-        @media (min-width: $xl-breakpoint) {
-            width: 100%;
-        }
+    @include min-lg {
+        width: 1200px;
     }
 }
 
 @for $colWidth from 1 to 12 {
-    .col-#{$colWidth} {
-        &, &-xs, &-sm, &-md, &-lg, &-xl {
+    .col__#{$colWidth} {
+        &, &--xs, &--sm, &--md, &--lg {
             @include grid($colWidth, true);
-
         }
-
-        &-xs {
+        &--xs {
             @media (max-width: $xs-breakpoint) {
                 @include grid($nColumns);
             }
         }
-        &-sm {
+        &--sm {
             @media (max-width: $sm-breakpoint) {
                 @include grid($nColumns);
             }
         }
-        &-md {
+        &--md {
             @media (max-width: $md-breakpoint) {
                 @include grid($nColumns);
             }
         }
-        &-lg {
+        &--lg {
             @media (min-width: $lg-breakpoint) {
-                @include grid($nColumns);
-            }
-        }
-        &-xl {
-            @media (min-width: $xl-breakpoint) {
                 @include grid($nColumns);
             }
         }
