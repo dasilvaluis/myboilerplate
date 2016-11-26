@@ -1,0 +1,27 @@
+{		
+   "name": "myboilerplate",
+   "description": "myboilerplate",
+   "main": "index.html",
+   "authors": [
+     "Luis Miguel <luis.m.silva@mail.com>"
+   ],
+   "license": "MIT",
+   "keywords": [
+     "HTML5",
+     "boilerplate"
+   ],
+   "homepage": "https://github.com/luisms/myBoilerPlate",
+   "moduleType": [],
+   "private": true,
+   "dependencies": {
+     "normalize-css": "^4.0.0"
+   },
+
+   "overrides": {
+     "normalizecss": {
+       "main": [
+         "./normalize.css"		
+       ]		
+     }	
+   }
+ }

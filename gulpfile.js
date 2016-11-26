@@ -24,7 +24,7 @@ var gulp            = require('gulp'),
 var path = manifest.paths,
     globs = manifest.globs,
     project = manifest.getProjectGlobs();
-    
+
 var prod = argv.production;
 
 gulp.task('images', function () {
@@ -89,7 +89,16 @@ gulp.task('styles', function() {
             .pipe(browserSync.stream());
 });
 
-gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
+gulp.task('wiredep', function() {
+    var wiredep = require('wiredep').stream;		
+    return gulp.src(project.css)		
+        .pipe(wiredep())		
+        .pipe(changed(path.source + 'styles', {		
+            hasChanged: changed.compareSha1Digest		
+        }))		
+    .pipe(gulp.dest(path.source + 'styles'));		
+ });
+gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'wiredep', 'styles') );
 
 gulp.task('clean', function () {
 	return gulp.src(path.dist, {read: false} )

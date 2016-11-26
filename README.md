@@ -37,7 +37,8 @@ Simple front-end boilerplate with everything needed to start the development of 
     │       │   ├── _header.scss
     │       │   └── _sections.scss
     │       └── main.scss
-    ├── gulpfile.js
+    ├── bower.json
+    ├── gulpfile.json
     ├── package.json
     └── public
         ├── .htaccess
@@ -52,6 +53,7 @@ Simple front-end boilerplate with everything needed to start the development of 
 
 * [NodeJS](https://nodejs.org/)
 * [Gulp](http://gulpjs.com/)
+* [Bower](http://bower.io/)
 
 ### Install
 
@@ -64,7 +66,12 @@ Download / Clone repo and CD into the created folder
 Install Node dependencies
 
     $ npm install
-    
+
+Install Bower dependencies		
+
+    $ bower install		
+ 
+ 
 Copy the `.env.example` file to a new file and name it `.env`
 
     $ cp .env.example .env
