@@ -1,7 +1,7 @@
 {
   "name": "myBoilerPlate",
   "description": "A Boilerplate aimed to make the starting of simple projects easier and faster",
-  "licence": "MIT",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/luismiguel-s/myBoilerPlate"
