@@ -73,14 +73,16 @@ For Browsersync, you can configure your virtualhost URL either by using `assets/
 
 Using `assets/config.json`:
 
-* Change `devUrl` variable in the config file.
+* Change `devUrl` variable in the config file
 
 
 Using `.env`:
 
 * Copy the `.env.example` file to a new file and name it `.env`
     
-* Open the `.env` file and change the `DEV_URL` variable.
+* Open the `.env` file and change the `DEV_URL` variable
+
+* In `gulpfile.js`, in the `watch` task (l:103) change the `proxy` setting to `process.env.DEV_URL` instead of `config.devUrl`
 
 
 ## Use it
