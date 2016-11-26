@@ -101,7 +101,7 @@ Watch for changes:
 
 Build for production: 
 
-    $ gulp build
+    $ gulp --production
 
 List all gulp commands:
 

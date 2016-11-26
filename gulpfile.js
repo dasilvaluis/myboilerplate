@@ -16,16 +16,24 @@ var gulp            = require('gulp'),
     merge           = require('merge-stream'),
     manifest        = require('asset-builder')('./assets/manifest.json'),
     dotenv          = require('dotenv').config(),
-    notify          = require("gulp-notify");
+    notify          = require("gulp-notify"),
+    gulpif          = require('gulp-if');
+    argv            = require('minimist')(process.argv.slice(2));
 
 var path = manifest.paths,
     globs = manifest.globs,
     project = manifest.getProjectGlobs();
 
+var prod = argv.production;
 
 gulp.task('images', function () {
     gulp.src(path.source + 'images/**/*')
         .pipe(gulp.dest(path.dist + 'images'))
+        .pipe(gulpif(prod, imagemin({
+            optimizationLevel: 5,
+            progressive: true,
+            interlaced: true
+        })))
         .pipe(browserSync.stream());
 });
 
@@ -39,14 +47,15 @@ gulp.task('scripts', function() {
     var merged = merge();
     manifest.forEachDependency('js', function(dep) {
         merged.add(
-        gulp.src(dep.globs, {base: 'scripts'})
-            .pipe(plumber({
-                errorHandler: notify.onError('Error: <%= error.message %>')
-            }))
-            .pipe(concat(dep.name))
+            gulp.src(dep.globs, {base: 'scripts'})
+                .pipe(plumber({
+                    errorHandler: notify.onError('Error: <%= error.message %>')
+                }))
+                .pipe(concat(dep.name))
         );
     });
     return merged
+                .pipe(gulpif(prod, uglify()))
                 .pipe(gulp.dest(path.dist + 'scripts' ))
                 .pipe(browserSync.stream());
 });
@@ -59,7 +68,7 @@ gulp.task('styles', function() {
             .pipe(plumber({
                 errorHandler: notify.onError('Error: <%= error.message %>')
             }))
-            .pipe(sourceMaps.init())
+            .pipe(gulpif(!prod, sourceMaps.init()))
             .pipe(sass({
                     errLogToConsole: true,
                     includePaths: ['.']
@@ -69,9 +78,9 @@ gulp.task('styles', function() {
                 browsers: autoPrefixBrowserList,
                 cascade:  true
             }))
-            .pipe(sourceMaps.write())
+            .pipe(gulpif(!prod, sourceMaps.write()))
+            .pipe(gulpif(prod, cssnano()))
             .pipe(concat(dep.name))
-    
     );
   });
   return merged
@@ -107,23 +116,4 @@ gulp.task('watch', ['default'], function() {
     gulp.watch(path.source + 'fonts/**/*', ['fonts']);
     gulp.watch(path.source + 'scripts/**/*', ['scripts']);
     gulp.watch(path.source + 'styles/**/*', ['styles']);
-});
-
-gulp.task('build', ['default'], function() {
-
-    gulp.src(path.dist + 'images/**/*' )
-        .pipe(imagemin({
-            optimizationLevel: 5,
-            progressive: true,
-            interlaced: true
-        }))
-        .pipe(gulp.dest(path.dist + 'images' ));
-
-    gulp.src(path.dist + 'scripts/**/*.js' )
-        .pipe(uglify())
-        .pipe(gulp.dest( path.dist + 'scripts' ));
-
-    gulp.src(path.dist + 'styles/**/*.css' )
-        .pipe(cssnano())
-        .pipe(gulp.dest(path.dist + 'styles' ));
 });
