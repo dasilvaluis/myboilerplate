@@ -88,7 +88,7 @@ Watch for changes:
 
 Build for production: 
 
-    $ gulp --production
+    $ gulp build
 
 ## Acknowledgements 
 
