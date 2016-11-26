@@ -19,7 +19,7 @@ Simple front-end boilerplate with everything needed to start the development of 
     ├── assets
     │   ├── fonts
     │   ├── images
-    │   ├── manifest.json
+    │   ├── config.json
     │   ├── scripts
     │   │   └── main.js
     │   └── styles
@@ -37,7 +37,6 @@ Simple front-end boilerplate with everything needed to start the development of 
     │       │   ├── _header.scss
     │       │   └── _sections.scss
     │       └── main.scss
-    ├── bower.json
     ├── gulpfile.json
     ├── package.json
     └── public
@@ -53,30 +52,35 @@ Simple front-end boilerplate with everything needed to start the development of 
 
 * [NodeJS](https://nodejs.org/)
 * [Gulp](http://gulpjs.com/)
-* [Bower](http://bower.io/)
 
 ### Install
 
 Download / Clone repo and CD into the created folder
 
     $ git clone https://github.com/luism-s/myBoilerplate.git projectname 
-    
+
     $ cd projectname/
     
 Install Node dependencies
 
     $ npm install
 
-Install Bower dependencies		
-
-    $ bower install		
+Configure your virtualhost Url to feed browsersync (notes below).
  
- 
-Copy the `.env.example` file to a new file and name it `.env`
+#### Virtualhost and Browsersync
 
-    $ cp .env.example .env
+For Browsersync, you can configure your virtualhost URL either by using `assets/config.json` file or by a `.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `assets/config.json` option.
+
+Using `assets/config.json`:
+
+* Change `devUrl` variable in the config file.
+
+
+Using `.env`:
+
+* Copy the `.env.example` file to a new file and name it `.env`
     
-Open the `.env` file and change `DEV_URL` variable value for your own virtualhost URL (ex: mysupernewsite.local)
+* Open the `.env` file and change the `DEV_URL` variable.
 
 
 ## Use it
