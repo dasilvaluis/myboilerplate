@@ -91,7 +91,9 @@ gulp.task('styles', function() {
             .pipe(browserSync.stream());
 });
 
-gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
+gulp.task('default', function(callback){
+    gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles')(callback)
+});
 
 gulp.task('clean', function () {
 	return gulp.src(paths.dist, {read: false} )
@@ -105,6 +107,7 @@ gulp.task('watch', ['default'], function() {
         notify: false
     });
 
+    gulp.watch(paths.source + 'config.json', ['default']);
     gulp.watch(paths.source + 'images/**/*', ['images']);
     gulp.watch(paths.source + 'fonts/**/*', ['fonts']);
     gulp.watch(paths.source + 'scripts/**/*', ['scripts']);

@@ -18,5 +18,8 @@
     "paths": {
         "source": "assets/",
         "dist": "public/assets/"
-    }
+    },
+    "watch": [
+        "public/**/*.html"
+    ]
 }
