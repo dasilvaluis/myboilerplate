@@ -1,0 +1,22 @@
+{
+    "dependencies": {
+        "js": {
+            "files": [
+                "scripts/main.js"                
+            ],
+            "name": "main.js"
+        },
+        "css": {
+            "files": [
+                "../node_modules/normalize.css/normalize.css",
+                "styles/main.scss"
+            ],
+            "name": "main.css"
+        }
+    },
+    "devUrl": "myboilerplate.dev",
+    "paths": {
+        "source": "assets/",
+        "dist": "public/assets/"
+    }
+}
