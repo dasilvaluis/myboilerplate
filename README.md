@@ -9,7 +9,7 @@ Simple front-end boilerplate with everything needed to start the development of 
 * CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Ability to manage dependencies in Asset Builder file, `assets/manifest.json`
+* Ability to manage dependencies in `assets/config.json`
 * 10-column grid system
 * Media query mixins 
 
