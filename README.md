@@ -9,7 +9,6 @@ Simple front-end boilerplate with everything needed to start the development of 
 * CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Automatically inject JS, CSS/SASS from bower using Assets Builder
 * Ability to manage dependencies in Asset Builder file, `assets/manifest.json`
 * 10-column grid system
 * Media query mixins 
@@ -38,7 +37,6 @@ Simple front-end boilerplate with everything needed to start the development of 
     │       │   ├── _header.scss
     │       │   └── _sections.scss
     │       └── main.scss
-    ├── bower.json
     ├── gulpfile.js
     ├── package.json
     └── public
@@ -48,19 +46,12 @@ Simple front-end boilerplate with everything needed to start the development of 
         ├── index.html
         └── robots.txt
 
-
-### Bower dependencies
-* [Susy](http://susy.oddbird.net/)
-* [Normalize.css](https://necolas.github.io/normalize.css/)
-* [Selectivizr](http://selectivizr.com/)
-
 ## Install
 
 ### Requirements
 
 * [NodeJS](https://nodejs.org/)
 * [Gulp](http://gulpjs.com/)
-* [Bower](http://bower.io/)
 
 ### Install
 
@@ -73,10 +64,6 @@ Download / Clone repo and CD into the created folder
 Install Node dependencies
 
     $ npm install
-    
-Install Bower dependencies
-
-    $ bower install
     
 Copy the `.env.example` file to a new file and name it `.env`
 
@@ -102,11 +89,6 @@ Watch for changes:
 Build for production: 
 
     $ gulp --production
-
-List all gulp commands:
-
-    $ gulp -T
-
 
 ## Acknowledgements 
 

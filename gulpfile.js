@@ -88,17 +88,7 @@ gulp.task('styles', function() {
             .pipe(browserSync.stream());
 });
 
-gulp.task('wiredep', function() {
-  var wiredep = require('wiredep').stream;
-  return gulp.src(project.css)
-    .pipe(wiredep())
-    .pipe(changed(path.source + 'styles', {
-      hasChanged: changed.compareSha1Digest
-    }))
-    .pipe(gulp.dest(path.source + 'styles'));
-});
-
-gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'wiredep', 'styles') );
+gulp.task('default', gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles') );
 
 gulp.task('clean', function () {
 	return gulp.src(path.dist, {read: false} )
