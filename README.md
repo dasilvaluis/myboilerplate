@@ -12,6 +12,7 @@ Simple front-end boilerplate with everything needed to start the development of 
 * Ability to manage dependencies in `assets/config.json`
 * 10-column grid system
 * Media query mixins 
+* Javascript Linter
 
 ### Project file structure
 
@@ -102,6 +103,10 @@ Watch for changes:
 Build for production: 
 
     $ gulp build --production
+
+Run [JSHint](http://jshint.com/) 
+
+    $ gulp --lintjs
 
 ## Acknowledgements 
 
