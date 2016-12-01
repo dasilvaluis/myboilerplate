@@ -23,15 +23,16 @@ var prod    = argv.production,
     lintjs  = argv.lintjs;
 
 var config  = require('./assets/config.json'),
-    css     = config.dependencies.css,
-    js      = config.dependencies.js,
+    deps    = config.dependencies,
     paths   = config.paths;
 
-var sources = function(list){
+var sources = function(list, def){
     var sources = [];
     list.forEach(function(dep) {
         sources.push(paths.source + dep);
     });
+    if(def)
+        sources.push(def);
     return sources;
 };
 
@@ -47,20 +48,21 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(paths.source + 'fonts/**/*')
+    
+    return gulp.src(sources(deps.fonts, paths.source + 'fonts/**/*'))
         .pipe(gulp.dest(paths.dist + 'fonts'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', function() {
 
-    return gulp.src(sources(js.files))
+    return gulp.src(sources(deps.js))
         .pipe(gulpif(lintjs, jshint()))
         .pipe(gulpif(lintjs, jshint.reporter('default')))
         .pipe(plumber({
             errorHandler: notify.onError('Error: <%= error.message %>')
         }))
-        .pipe(concat(js.name))
+        .pipe(concat('main.js'))
         .pipe(gulpif(prod, uglify()))
         .pipe(gulp.dest(paths.dist + 'scripts' ))
         .pipe(browserSync.stream());
@@ -68,7 +70,7 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function() {
 
-    return gulp.src(sources(css.files))
+    return gulp.src(sources(deps.css, paths.source + 'styles/main.scss'))
         .pipe(plumber({
             errorHandler: notify.onError('Error: <%= error.message %>')
         }))
@@ -83,7 +85,7 @@ gulp.task('styles', function() {
         }))
         .pipe(gulpif(!prod, sourceMaps.write()))
         .pipe(gulpif(prod, cssnano()))
-        .pipe(concat(css.name))
+        .pipe(concat('main.css'))
         .pipe(gulp.dest(paths.dist + 'styles' ))
         .pipe(browserSync.stream());
 });
