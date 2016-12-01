@@ -1,13 +1,11 @@
 {
     "dependencies": {
         "js": [
-            "scripts/main.js"                
         ],
         "css": [
             "../node_modules/normalize.css/normalize.css"
         ],
         "fonts": [
-            
         ]
     },
     "devUrl": "myboilerplate.dev",

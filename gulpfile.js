@@ -56,7 +56,7 @@ gulp.task('fonts', function () {
 
 gulp.task('scripts', function() {
 
-    return gulp.src(sources(deps.js))
+    return gulp.src(sources(deps.js, paths.source + 'scripts/main.js'))
         .pipe(gulpif(lintjs, jshint()))
         .pipe(gulpif(lintjs, jshint.reporter('default')))
         .pipe(plumber({
