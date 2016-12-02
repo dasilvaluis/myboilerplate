@@ -1,11 +1,17 @@
 {
     "dependencies": {
         "js": [
+            "scripts/main.js"
         ],
         "css": [
-            "../node_modules/normalize.css/normalize.css"
+            "../node_modules/normalize.css/normalize.css",            
+            "styles/main.scss"
         ],
         "fonts": [
+            "fonts/**/*"
+        ],
+        "images": [
+            "images/**/*"
         ]
     },
     "devUrl": "myboilerplate.dev",
