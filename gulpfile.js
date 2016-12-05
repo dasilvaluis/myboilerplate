@@ -27,20 +27,6 @@ var config  = require('./config.json'),
     deps    = config.dependencies,
     paths   = config.paths;
 
-/**
- * Iterates over dependency lists and concatenates each path in an array
- * @param {array} list List of dependencies to be iterated
- * @param {string} def Default dependency to be injected in the end
- * @returns Array of dependencies paths
- */
-var sources = function (list){
-    var sources = [];
-    list.forEach(function(dep) {
-        sources.push(paths.source + dep);
-    });
-    return sources;
-};
-
 var finalize = function (directory) {
   return lazypipe()
     .pipe(gulp.dest, paths.dist + directory)
