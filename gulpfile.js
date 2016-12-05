@@ -23,7 +23,7 @@ var lazypipe        = require('lazypipe');
 var prod    = argv.production,
     lintjs  = argv.lintjs;
 
-var config  = require('./assets/config.json'),
+var config  = require('./config.json'),
     deps    = config.dependencies,
     paths   = config.paths;
 
@@ -48,7 +48,7 @@ var finalize = function (directory) {
 };
 
 gulp.task('images', function () {
-    gulp.src(sources(deps.images))
+    gulp.src(deps.images)
         .pipe(gulpif(prod, imagemin({
             optimizationLevel: 5,
             progressive: true,
@@ -59,7 +59,7 @@ gulp.task('images', function () {
 
 gulp.task('fonts', function () {
     
-    return gulp.src(sources(deps.fonts))
+    return gulp.src(deps.fonts)
         .pipe(finalize('fonts'));
 });
 
@@ -71,7 +71,7 @@ gulp.task('jshint', function() {
 
 gulp.task('scripts', function() {
 
-    return gulp.src(sources(deps.js))
+    return gulp.src(deps.js)
         .pipe(plumber({
             errorHandler: notify.onError('Error: <%= error.message %>')
         }))
@@ -84,7 +84,7 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function() {
 
-    return gulp.src(sources(deps.css))
+    return gulp.src(deps.css)
         .pipe(plumber({
             errorHandler: notify.onError('Error: <%= error.message %>')
         }))

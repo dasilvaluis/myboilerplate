@@ -1,20 +1,20 @@
 {
     "dependencies": {
         "js": [
-            "scripts/main.js"
+            "assets/scripts/main.js"
         ],
         "css": [
             "../node_modules/normalize.css/normalize.css",            
-            "styles/main.scss"
+            "assets/styles/main.scss"
         ],
         "fonts": [
-            "fonts/**/*"
+            "assets/fonts/**/*"
         ],
         "images": [
-            "images/**/*"
+            "assets/images/**/*"
         ]
     },
-    "devUrl": "myboilerplate.dev",
+    "devUrl": "http://example.dev",
     "paths": {
         "source": "assets/",
         "dist": "public/assets/"
