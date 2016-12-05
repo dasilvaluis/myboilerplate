@@ -9,7 +9,7 @@ Simple front-end boilerplate with everything needed to start the development of 
 * CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Ability to manage dependencies in `assets/config.json`
+* Ability to manage dependencies in `config.json`
 * 10-column grid system
 * Media query mixins 
 * Javascript Linter
@@ -20,7 +20,6 @@ Simple front-end boilerplate with everything needed to start the development of 
     ├── assets
     │   ├── fonts
     │   ├── images
-    │   ├── config.json
     │   ├── scripts
     │   │   └── main.js
     │   └── styles
@@ -38,6 +37,7 @@ Simple front-end boilerplate with everything needed to start the development of 
     │       │   ├── _header.scss
     │       │   └── _sections.scss
     │       └── main.scss
+    ├── config.json
     ├── gulpfile.json
     ├── package.json
     └── public
@@ -70,9 +70,9 @@ Configure your virtualhost Url to feed browsersync (notes below).
  
 #### Virtualhost and Browsersync
 
-For Browsersync, you can configure your virtualhost URL either by using `assets/config.json` file or by a `.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `assets/config.json` option.
+For Browsersync, you can configure your virtualhost URL either by using `config.json` file or by a `.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `config.json` option.
 
-Using `assets/config.json`:
+Using `config.json`:
 
 * Change `devUrl` variable in the config file
 
