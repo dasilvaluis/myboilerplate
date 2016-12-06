@@ -115,5 +115,5 @@ This project is influenced by similar projects such as:
 * [HTML5 Boilerplate](https://html5boilerplate.com/)
 * [Front-endboilerplate](http://frontendboilerplate.com/)
 
-## TODO
-Find a way to not apply run JSHint in vendor files
+## Known Issues
+Gulp watch will only listen to changes in assets folders that already have something inside in the beginning. If `assets/images/` is empty, it wont run the task when th first file is added. 
