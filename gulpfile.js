@@ -44,23 +44,19 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-    
     return gulp.src(deps.fonts)
         .pipe(finalize('fonts'));
 });
 
 gulp.task('jshint', function() {
-  return gulp.src(['gulpfile.js', 'assets/config.js'].concat(deps.js))
+  return gulp.src(['gulpfile.js', 'config.js'].concat(config.jslintFiles))
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['jshint'], function() {
 
     return gulp.src(deps.js)
-        .pipe(plumber({
-            errorHandler: notify.onError('Error: <%= error.message %>')
-        }))
         .pipe(gulpif(!prod, sourcemaps.init()))
         .pipe(concat('main.js'))
         .pipe(gulpif(!prod, sourcemaps.write('.')))
@@ -105,9 +101,9 @@ gulp.task('watch', ['default'], function() {
         notify: false
     });
 
-    gulp.watch(paths.source + 'config.json', ['default']);
+    gulp.watch('config.json', ['default']);
     gulp.watch(paths.source + 'images/**/*', ['images']);
     gulp.watch(paths.source + 'fonts/**/*', ['fonts']);
-    gulp.watch(paths.source + 'scripts/**/*', ['jshint', 'scripts']);
+    gulp.watch(paths.source + 'scripts/**/*', ['scripts']);
     gulp.watch(paths.source + 'styles/**/*', ['styles']);
 });
