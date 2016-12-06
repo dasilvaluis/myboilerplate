@@ -42,27 +42,27 @@
         }
         &--xs {
             @include max-xs {
-                @include grid($nColumns);
+                width: 100%;
             }
         }
         &--sm {
             @include max-sm {
-                @include grid($nColumns);
+                width: 100%;
             }
         }
         &--md {
             @include max-md {
-                @include grid($nColumns);
+                width: 100%;
             }
         }
         &--lg {
             @include max-lg {
-                @include grid($nColumns);
+                width: 100%;
             }
         }
         &--xlg {
             @include max-xlg {
-                @include grid($nColumns);
+                width: 100%;
             }
         }
     }
