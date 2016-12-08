@@ -1,12 +1,3 @@
-@mixin grid($size, $has-gutter:false){
-    @if $has-gutter {
-        width: calc( (1 - #{$gutter}) * (100% / #{$nColumns}) * #{$size} );
-        margin: 0 ($gutter/2)*100%;
-    }
-    @else {
-        width: calc( (100% / #{$nColumns}) * #{$size} );
-    }
-}
 .container {
     max-width: 100%;
     margin-left: auto;
@@ -35,34 +26,69 @@
     }
 }
 
-@for $colWidth from 1 to 12 {
-    .col__#{$colWidth} {
-        &, &--xs, &--sm, &--md, &--lg, &--xlg {
-            @include grid($colWidth, true);
+.grid {
+
+    &, &--no-space {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        > [class*=col__] {
+            box-sizing: border-box;
         }
-        &--xs {
-            @include max-xs {
-                width: 100%;
+        @for $colWidth from 1 to 12 {
+            .col__#{$colWidth} {
+                &, &--xs, &--sm, &--md, &--lg, &--xlg {
+                    width: calc( (100% /  #{$colWidth}) );
+                }
+                &--xs {
+                    @include max-xs {
+                        width: 100%;
+                    }
+                }
+                &--sm {
+                    @include max-sm {
+                        width: 100%;
+                    }
+                }
+                &--md {
+                    @include max-md {
+                        width: 100%;
+                    }
+                }
+                &--lg {
+                    @include max-lg {
+                        width: 100%;
+                    }
+                }
+                &--xlg {
+                    @include max-xlg {
+                        width: 100%;
+                    }
+                }
             }
         }
-        &--sm {
-            @include max-sm {
-                width: 100%;
+    }
+        
+    & {
+        @include max-sm {
+            margin-left: -5px;
+            > [class*=col__] {
+                padding-left: 5px;
             }
         }
-        &--md {
-            @include max-md {
-                width: 100%;
+        @include sm-md {
+            margin-left: -15px;
+            > [class*=col__] {
+                padding-left: 15px;
             }
         }
-        &--lg {
-            @include max-lg {
-                width: 100%;
-            }
-        }
-        &--xlg {
-            @include max-xlg {
-                width: 100%;
+        @include min-md {
+            margin-left: -25px;
+            > [class*=col__] {
+                padding-left: 25px;
             }
         }
     }
