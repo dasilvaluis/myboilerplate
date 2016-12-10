@@ -28,7 +28,7 @@
 
 .grid {
 
-    &, &--no-space {
+    &, &--wide {
         display: flex;
         flex-wrap: wrap;
         margin: 0;
@@ -38,10 +38,10 @@
         > [class*=col__] {
             box-sizing: border-box;
         }
-        @for $colWidth from 1 to 12 {
+        @for $colWidth from 1 to 1+$nColumns {
             .col__#{$colWidth} {
                 &, &--xs, &--sm, &--md, &--lg, &--xlg {
-                    width: calc( (100% /  #{$colWidth}) );
+                    width: 100%/$colWidth;
                 }
                 &--xs {
                     @include max-xs {
