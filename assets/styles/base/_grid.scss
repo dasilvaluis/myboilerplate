@@ -28,7 +28,11 @@
 
 .grid {
 
-    &, &--wide {
+    &,
+    &--small,
+    &--medium,
+    &--large,
+    &--wide {
         display: flex;
         flex-wrap: wrap;
         margin: 0;
@@ -39,7 +43,7 @@
             box-sizing: border-box;
         }
         @for $colWidth from 1 to 1+$nColumns {
-            .col__#{$colWidth} {
+            > .col__#{$colWidth} {
                 &, &--xs, &--sm, &--md, &--lg, &--xlg {
                     width: 100%/$colWidth;
                 }
@@ -90,6 +94,25 @@
             > [class*=col__] {
                 padding-left: 25px;
             }
+        }
+    }
+
+    &--small {
+        margin-left: -5px;
+        > [class*=col__] {
+            padding-left: 5px;
+        }
+    }
+    &--medium {
+        margin-left: -15px;
+        > [class*=col__] {
+            padding-left: 15px;
+        }
+    }
+    &--large {
+        margin-left: -25px;
+        > [class*=col__] {
+            padding-left: 25px;
         }
     }
 }
