@@ -1,15 +1,17 @@
+// Local
+var clean           = require('gulp-clean');
+var browserSync     = require('browser-sync');
+var dotenv          = require('dotenv').config();	 
+var argv            = require('minimist')(process.argv.slice(2));
+var gulpSequence    = require('gulp-sequence').use(gulp);
+
+// Globals
 global.gulp            = require('gulp');
 global.plumber         = require('gulp-plumber');
 global.notify          = require('gulp-notify');
 global.gulpif          = require('gulp-if');
 global.filelog         = require('gulp-filelog');
 global.lazypipe        = require('lazypipe');
-
-var clean           = require('gulp-clean');
-var browserSync     = require('browser-sync');
-var dotenv          = require('dotenv').config();	 
-var argv            = require('minimist')(process.argv.slice(2));
-var gulpSequence    = require('gulp-sequence').use(gulp);
 
 global.prod    = argv.production,
 global.lintjs  = argv.lintjs;
