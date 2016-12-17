@@ -1,89 +1,30 @@
-var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
+global.gulp            = require('gulp');
+global.plumber         = require('gulp-plumber');
+global.notify          = require('gulp-notify');
+global.gulpif          = require('gulp-if');
+global.filelog         = require('gulp-filelog');
+global.lazypipe        = require('lazypipe');
 
-var gulp            = require('gulp');
-var sass            = require('gulp-sass');
-var browserSync     = require('browser-sync');
-var autoprefixer    = require('gulp-autoprefixer');
-var uglify          = require('gulp-uglify');
-var cssnano         = require('gulp-cssnano');
-var concat          = require('gulp-concat');
-var sourcemaps      = require('gulp-sourcemaps');
-var imagemin        = require('gulp-imagemin');
-var gulpSequence    = require('gulp-sequence').use(gulp);
-var plumber         = require('gulp-plumber');
 var clean           = require('gulp-clean');
+var browserSync     = require('browser-sync');
 var dotenv          = require('dotenv').config();	 
-var notify          = require('gulp-notify');
-var gulpif          = require('gulp-if');
 var argv            = require('minimist')(process.argv.slice(2));
-var filelog         = require('gulp-filelog');
-var jshint          = require('gulp-jshint');
-var lazypipe        = require('lazypipe');
+var gulpSequence    = require('gulp-sequence').use(gulp);
 
-var prod    = argv.production,
-    lintjs  = argv.lintjs;
+global.prod    = argv.production,
+global.lintjs  = argv.lintjs;
 
-var config  = require('./config.json'),
-    deps    = config.dependencies,
-    paths   = config.paths;
+global.config  = require('./config.json'),
+global.deps    = config.dependencies,
+global.paths   = config.paths;
 
-var finalize = function (directory) {
-  return lazypipe()
-    .pipe(gulp.dest, paths.dist + directory)
-    .pipe(browserSync.stream)();
+global.finalize = function (directory) {
+    return lazypipe()
+        .pipe(gulp.dest, paths.dist + directory)
+        .pipe(browserSync.stream)();
 };
 
-gulp.task('images', function () {
-    gulp.src(deps.images)
-        .pipe(gulpif(prod, imagemin({
-            optimizationLevel: 5,
-            progressive: true,
-            interlaced: true
-        })))
-        .pipe(finalize('images'));
-});
-
-gulp.task('fonts', function () {
-    return gulp.src(deps.fonts)
-        .pipe(finalize('fonts'));
-});
-
-gulp.task('jshint', function() {
-  return gulp.src(['gulpfile.js', 'config.js'].concat(config.jslintFiles))
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-});
-
-gulp.task('scripts', ['jshint'], function() {
-
-    return gulp.src(deps.js)
-        .pipe(gulpif(!prod, sourcemaps.init()))
-        .pipe(concat('main.js'))
-        .pipe(gulpif(!prod, sourcemaps.write('.')))
-        .pipe(gulpif(prod, uglify()))
-        .pipe(finalize('scripts'));
-});
-
-gulp.task('styles', function() {
-
-    return gulp.src(deps.css)
-        .pipe(plumber({
-            errorHandler: notify.onError('Error: <%= error.message %>')
-        }))
-        .pipe(gulpif(!prod, sourcemaps.init()))
-        .pipe(gulpif('*.scss', sass({
-            errLogToConsole: true,
-            includePaths: ['.']
-        })))
-        .pipe(autoprefixer({
-            browsers: autoPrefixBrowserList,
-            cascade:  true
-        }))
-        .pipe(concat('main.css'))
-        .pipe(gulpif(!prod, sourcemaps.write('.')))
-        .pipe(gulpif(prod, cssnano()))
-        .pipe(finalize('styles'));
-});
+require('require-dir')('./gulp-tasks');
 
 gulp.task('default', function(callback){
     gulpSequence('clean', 'images', 'fonts', 'scripts', 'styles')(callback);
