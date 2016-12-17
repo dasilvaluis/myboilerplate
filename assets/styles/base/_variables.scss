@@ -10,11 +10,11 @@ $breakpoint-lg: 1200px;
 $breakpoint-xlg: 1800px;
 
 // Widths
-$screen-width--max-sm: 95%;
-$screen-width--sm-md: 95%;
-$screen-width--md-lg: $breakpoint-md * 0.8;
-$screen-width--lg-xlg: $breakpoint-lg * 0.8;
-$screen-width--min-xlg: $breakpoint-xlg * 0.8;
+$screen-width--max-sm: 90%;
+$screen-width--sm-md: 90%;
+$screen-width--md-lg: $breakpoint-md * 0.9;
+$screen-width--lg-xlg: $breakpoint-lg * 0.9;
+$screen-width--min-xlg: $breakpoint-xlg * 0.9;
 
 //Grid system settings
 $nColumns: 10;
