@@ -13,8 +13,8 @@ Icon
 .Spotlight-V100
 .Trashes
 
-/node_modules
-/vendor/
+node_modules
+vendor
 .sass-cache
 /public/assets
 

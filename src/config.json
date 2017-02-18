@@ -17,10 +17,10 @@
     "jslintFiles": [
         "assets/scripts/main.js"
     ],
-    "devUrl": "http://example.dev",
+    "devUrl": "http://myboilerplate.dev",
     "paths": {
         "source": "assets/",
-        "dist": "public/assets/"
+        "dist": "../public/assets/"
     },
     "watch": [
         "public/**/*.html"

@@ -16,37 +16,54 @@ Simple front-end boilerplate with everything needed to start the development of 
 
 ### Project file structure
 
-    .
-    ├── assets
-    │   ├── fonts
-    │   ├── images
-    │   ├── scripts
-    │   │   └── main.js
-    │   └── styles
-    │       ├── base
-    │       │   ├── _general.scss
-    │       │   ├── _grid.scss
-    │       │   ├── _mixins.scss
-    │       │   └── _variables.scss
-    │       ├── components
-    │       │   ├── _buttons.scss
-    │       │   ├── _fonts.scss
-    │       │   └── _forms.scss
-    │       ├── layout
-    │       │   ├── _footer.scss
-    │       │   ├── _header.scss
-    │       │   └── _sections.scss
-    │       └── main.scss
-    ├── config.json
-    ├── gulpfile.json
-    ├── package.json
-    └── public
-        ├── .htaccess
-        ├── 404.html
-        ├── humans.txt
-        ├── index.html
-        └── robots.txt
-
+    .                                     
+    ├── public                                  
+    │   ├── assets                                   
+    │   │   ├── scripts                              
+    │   │   │   ├── main.js                          
+    │   │   │   └── main.js.map                      
+    │   │   └── styles                               
+    │   │       ├── main.css                         
+    │   │       └── main.css.map                     
+    │   ├── grid.html                                
+    │   ├── humans.txt                               
+    │   ├── index.html                                       
+    │   ├── 404.html                              
+    │   └── robots.txt                                   
+    └── src                                          
+        ├── assets                                   
+        │   ├── fonts                                
+        │   ├── images                               
+        │   ├── scripts                              
+        │   │   └── main.js                          
+        │   └── styles                               
+        │       ├── base                             
+        │       │   ├── _general.scss                
+        │       │   ├── _grid.scss                   
+        │       │   ├── _mixins.scss                 
+        │       │   └── _variables.scss              
+        │       ├── components                       
+        │       │   ├── _buttons.scss                
+        │       │   ├── _fonts.scss                  
+        │       │   └── _forms.scss                  
+        │       ├── layout                           
+        │       │   ├── _footer.scss                 
+        │       │   ├── _header.scss                 
+        │       │   └── _sections.scss               
+        │       └── main.scss                                  
+        ├── gulp-tasks                               
+        │   ├── build.js                             
+        │   ├── clean.js                             
+        │   ├── default.js                           
+        │   ├── fonts.js                             
+        │   ├── images.js                            
+        │   ├── scripts.js                           
+        │   ├── styles.js                            
+        │   └── watch.js                    
+        ├── config.json                              
+        ├── gulpfile.js                             
+        └── package.json                             
+                                                 
 ## Install
 
 ### Requirements
@@ -70,20 +87,20 @@ Configure your virtualhost Url to feed browsersync (notes below).
  
 #### Virtualhost and Browsersync
 
-For Browsersync, you can configure your virtualhost URL either by using `config.json` file or by a `.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `config.json` option.
+For Browsersync, you can configure your virtualhost URL either by using `src/config.json` file or by a `src/.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `config.json` option.
 
-Using `config.json`:
+Using `src/config.json`:
 
 * Change `devUrl` variable in the config file
 
 
-Using `.env`:
+Using `src/.env`:
 
-* Copy the `.env.example` file to a new file and name it `.env`
+* Copy the `src/.env.example` file to a new file and name it `.env`
     
-* Open the `.env` file and change the `DEV_URL` variable
+* Open the `src/.env` file and change the `DEV_URL` variable
 
-* In `gulpfile.js`, in the `watch` task (l:103) change the `proxy` setting to `process.env.DEV_URL` instead of `config.devUrl`
+* In `src/gulpfile.js`, in the `watch` task (l:103) change the `proxy` setting to `process.env.DEV_URL` instead of `config.devUrl`
 
 
 ## Use it
@@ -102,7 +119,7 @@ Watch for changes:
 
 Build for production: 
 
-    $ gulp build --production
+    $ gulp build --prod
 
 Run [JSHint](http://jshint.com/) 
 
