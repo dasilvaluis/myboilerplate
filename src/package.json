@@ -13,7 +13,7 @@
     }
   ],
   "devDependencies": {
-    "browser-sync": "^2.18.1",
+    "browser-sync": "^2.18.8",
     "dotenv": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -28,8 +28,8 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.2",
     "gulp-sequence": "^0.4.6",
-    "gulp-sourcemaps": "^2.2.0",
-    "gulp-uglify": "^2.0.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.1.2",
     "jshint": "^2.9.4",
     "lazypipe": "^1.0.1",
     "minimist": "^1.1.3",
