@@ -9,80 +9,98 @@ Simple front-end boilerplate with everything needed to start the development of 
 * CSS and Javascript concatenation and compression
 * Image compression
 * Browsersync
-* Automatically inject JS, CSS/SASS from bower using Assets Builder
-* Ability to manage dependencies in Asset Builder file, `assets/manifest.json`
+* Ability to manage dependencies in `config.json`
 * 10-column grid system
 * Media query mixins 
+* Javascript Linter
 
 ### Project file structure
 
-    .
-    ├── assets
-    │   ├── fonts
-    │   ├── images
-    │   ├── manifest.json
-    │   ├── scripts
-    │   │   └── main.js
-    │   └── styles
-    │       ├── base
-    │       │   ├── _general.scss
-    │       │   ├── _grid.scss
-    │       │   ├── _mixins.scss
-    │       │   └── _variables.scss
-    │       ├── components
-    │       │   ├── _buttons.scss
-    │       │   ├── _fonts.scss
-    │       │   └── _forms.scss
-    │       ├── layout
-    │       │   ├── _footer.scss
-    │       │   ├── _header.scss
-    │       │   └── _sections.scss
-    │       └── main.scss
-    ├── bower.json
-    ├── gulpfile.js
-    ├── package.json
-    └── public
-        ├── .htaccess
-        ├── 404.html
-        ├── humans.txt
-        ├── index.html
-        └── robots.txt
-
-
-### Bower dependencies
-* [Susy](http://susy.oddbird.net/)
-* [Normalize.css](https://necolas.github.io/normalize.css/)
-* [Selectivizr](http://selectivizr.com/)
-
+    .                                     
+    ├── public                                  
+    │   ├── assets                                   
+    │   │   ├── scripts                              
+    │   │   │   ├── main.js                          
+    │   │   │   └── main.js.map                      
+    │   │   └── styles                               
+    │   │       ├── main.css                         
+    │   │       └── main.css.map                     
+    │   ├── grid.html                                
+    │   ├── humans.txt                               
+    │   ├── index.html                                       
+    │   ├── 404.html                              
+    │   └── robots.txt                                   
+    └── src                                          
+        ├── assets                                   
+        │   ├── fonts                                
+        │   ├── images                               
+        │   ├── scripts                              
+        │   │   └── main.js                          
+        │   └── styles                               
+        │       ├── base                             
+        │       │   ├── _general.scss                
+        │       │   ├── _grid.scss                   
+        │       │   ├── _mixins.scss                 
+        │       │   └── _variables.scss              
+        │       ├── components                       
+        │       │   ├── _buttons.scss                
+        │       │   ├── _fonts.scss                  
+        │       │   └── _forms.scss                  
+        │       ├── layout                           
+        │       │   ├── _footer.scss                 
+        │       │   ├── _header.scss                 
+        │       │   └── _sections.scss               
+        │       └── main.scss                                  
+        ├── gulp-tasks                               
+        │   ├── build.js                             
+        │   ├── clean.js                             
+        │   ├── default.js                           
+        │   ├── fonts.js                             
+        │   ├── images.js                            
+        │   ├── scripts.js                           
+        │   ├── styles.js                            
+        │   └── watch.js                    
+        ├── config.json                              
+        ├── gulpfile.js                             
+        └── package.json                             
+                                                 
 ## Install
 
 ### Requirements
 
 * [NodeJS](https://nodejs.org/)
 * [Gulp](http://gulpjs.com/)
-* [Bower](http://bower.io/)
 
 ### Install
 
 Download / Clone repo and CD into the created folder
 
     $ git clone https://github.com/luism-s/myBoilerplate.git projectname 
-    
+
     $ cd projectname/
     
 Install Node dependencies
 
     $ npm install
-    
-Install Bower dependencies
 
-    $ bower install
-    
-Copy the `.env.example` file to a new file and name it `.env`
+Configure your virtualhost Url to feed browsersync (notes below).
+ 
+#### Virtualhost and Browsersync
 
-    $ cp .env.example .env
+For Browsersync, you can configure your virtualhost URL either by using `src/config.json` file or by a `src/.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `config.json` option.
+
+Using `src/config.json`:
+
+* Change `devUrl` variable in the config file
+
+
+Using `src/.env`:
+
+* Copy the `src/.env.example` file to a new file and name it `.env`
     
-Open the `.env` file and change `DEV_URL` variable value for your own virtualhost URL (ex: mysupernewsite.local)
+* Open the `src/.env` file and change the `DEV_URL` variable
+
+* In `src/gulpfile.js`, in the `watch` task (l:103) change the `proxy` setting to `process.env.DEV_URL` instead of `config.devUrl`
 
 
 ## Use it
@@ -101,12 +119,11 @@ Watch for changes:
 
 Build for production: 
 
-    $ gulp build
+    $ gulp build --prod
 
-List all gulp commands:
+Run [JSHint](http://jshint.com/) 
 
-    $ gulp -T
-
+    $ gulp --lintjs
 
 ## Acknowledgements 
 
@@ -115,17 +132,5 @@ This project is influenced by similar projects such as:
 * [HTML5 Boilerplate](https://html5boilerplate.com/)
 * [Front-endboilerplate](http://frontendboilerplate.com/)
 
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2016 Luís Silva
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-*tl;dr*: Free as the rain
+## Known Issues
+Gulp watch will only listen to changes in assets folders that already have something inside in the beginning. If `assets/images/` is empty, it wont run the task when th first file is added. 

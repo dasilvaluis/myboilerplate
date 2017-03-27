@@ -1,0 +1,28 @@
+{
+    "dependencies": {
+        "js": [
+            "assets/scripts/main.js"
+        ],
+        "css": [
+            "node_modules/normalize.css/normalize.css",
+            "assets/styles/main.scss"
+        ],
+        "fonts": [
+            "assets/fonts/**/*"
+        ],
+        "images": [
+            "assets/images/**/*"
+        ]
+    },
+    "jslintFiles": [
+        "assets/scripts/main.js"
+    ],
+    "devUrl": "http://myboilerplate.dev",
+    "paths": {
+        "source": "assets/",
+        "dist": "../public/assets/"
+    },
+    "watch": [
+        "public/**/*.html"
+    ]
+}

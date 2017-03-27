@@ -14,8 +14,7 @@ Icon
 .Trashes
 
 node_modules
-bower_components
-/vendor/
+vendor
 .sass-cache
 /public/assets
 

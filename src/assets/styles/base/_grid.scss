@@ -1,0 +1,118 @@
+.container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    &:after {
+        content: " ";
+        display: block;
+        clear: both; 
+    }
+    
+    @include max-sm {
+    	width: $screen-width--max-sm;
+    }
+    @include sm-md {
+        width: $screen-width--sm-md;
+    }
+    @include md-lg {
+        width: $screen-width--md-lg;
+    }
+    @include lg-xlg {
+        width: $screen-width--lg-xlg;
+    }
+    @include min-xlg {
+        width: $screen-width--min-xlg;
+    }
+}
+
+.grid {
+
+    &,
+    &--small,
+    &--medium,
+    &--large,
+    &--wide {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        > [class*=col__] {
+            box-sizing: border-box;
+        }
+        @for $colWidth from 1 to 1+$nColumns {
+            > .col__#{$colWidth} {
+                &, &--xs, &--sm, &--md, &--lg, &--xlg {
+                    width: 100%/$colWidth;
+                }
+                &--xs {
+                    @include max-xs {
+                        width: 100%;
+                    }
+                }
+                &--sm {
+                    @include max-sm {
+                        width: 100%;
+                    }
+                }
+                &--md {
+                    @include max-md {
+                        width: 100%;
+                    }
+                }
+                &--lg {
+                    @include max-lg {
+                        width: 100%;
+                    }
+                }
+                &--xlg {
+                    @include max-xlg {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+        
+    & {
+        @include max-sm {
+            margin-left: -5px;
+            > [class*=col__] {
+                padding-left: 5px;
+            }
+        }
+        @include sm-md {
+            margin-left: -15px;
+            > [class*=col__] {
+                padding-left: 15px;
+            }
+        }
+        @include min-md {
+            margin-left: -25px;
+            > [class*=col__] {
+                padding-left: 25px;
+            }
+        }
+    }
+
+    &--small {
+        margin-left: -5px;
+        > [class*=col__] {
+            padding-left: 5px;
+        }
+    }
+    &--medium {
+        margin-left: -15px;
+        > [class*=col__] {
+            padding-left: 15px;
+        }
+    }
+    &--large {
+        margin-left: -25px;
+        > [class*=col__] {
+            padding-left: 25px;
+        }
+    }
+}
