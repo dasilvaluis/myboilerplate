@@ -77,7 +77,7 @@ Download / Clone repo and CD into the created folder
 
     $ git clone https://github.com/luism-s/myBoilerplate.git projectname 
 
-    $ cd projectname/
+    $ cd projectname/src
     
 Install Node dependencies
 
@@ -91,7 +91,8 @@ For Browsersync, you can configure your virtualhost URL either by using `src/con
 
 Using `src/config.json`:
 
-* Change `devUrl` variable in the config file
+* Create your virtual domain using your local hosts file (for OSX it's in /etc/hosts)
+* Change `devUrl` variable in the config file with your virtual domain
 
 
 Using `src/.env`:
@@ -104,6 +105,10 @@ Using `src/.env`:
 
 
 ## Use it
+
+CD into the project folder
+
+    $ cd projectname/src
 
 Run tasks once: 
 
