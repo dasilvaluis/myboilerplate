@@ -1,4 +1,4 @@
-# My Boilerplate
+# myboilerplate
 
 Simple front-end boilerplate with everything needed to start the development of simple web pages/web apps
 
@@ -18,7 +18,7 @@ Simple front-end boilerplate with everything needed to start the development of 
 
     .                                     
     ├── public                                  
-    │   ├── assets                                   
+    │   ├── dist                                   
     │   │   ├── scripts                              
     │   │   │   ├── main.js                          
     │   │   │   └── main.js.map                      
@@ -38,7 +38,7 @@ Simple front-end boilerplate with everything needed to start the development of 
         │   │   └── main.js                          
         │   └── styles                               
         │       ├── base                             
-        │       │   ├── _general.scss                
+        │       │   ├── _base.scss                
         │       │   ├── _grid.scss                   
         │       │   ├── _mixins.scss                 
         │       │   └── _variables.scss              
@@ -49,6 +49,7 @@ Simple front-end boilerplate with everything needed to start the development of 
         │       ├── layout                           
         │       │   ├── _footer.scss                 
         │       │   ├── _header.scss                 
+        │       │   ├── _navbar.scss                 
         │       │   └── _sections.scss               
         │       └── main.scss                                  
         ├── gulp-tasks                               
@@ -114,7 +115,7 @@ Run tasks once:
 
     $ gulp
 
-Clean 'public/assets' folder:
+Clean 'public/dist' folder:
 
     $ gulp clean
 
