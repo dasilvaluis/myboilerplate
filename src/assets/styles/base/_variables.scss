@@ -16,5 +16,6 @@ $screen-width--md-lg: $breakpoint-md * 0.9;
 $screen-width--lg-xlg: $breakpoint-lg * 0.9;
 $screen-width--min-xlg: $breakpoint-xlg * 0.9;
 
-//Grid system settings
-$nColumns: 10;
+// Container
+$container-max-width: 1024px;
+$container-horizontal-padding: 15px;
