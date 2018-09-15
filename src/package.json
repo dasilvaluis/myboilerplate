@@ -1,20 +1,17 @@
 {
-  "name": "myBoilerPlate",
+  "name": "myboilerplate",
   "description": "A Boilerplate aimed to make the starting of simple projects easier and faster",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luismiguel-s/myBoilerPlate"
+    "url": "https://github.com/luism-s/myboilerplate"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
-    }
-  ],
+  "scripts": {
+    "build": "gulp --prod",
+    "watch": "gulp clean && gulp watch"
+  },
   "devDependencies": {
     "browser-sync": "^2.18.8",
-    "dotenv": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-clean": "^0.3.2",

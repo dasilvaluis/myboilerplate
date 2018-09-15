@@ -10,8 +10,6 @@ Simple front-end boilerplate with everything needed to start the development of 
 * Image compression
 * Browsersync
 * Ability to manage dependencies in `config.json`
-* 10-column grid system
-* Media query mixins 
 * Javascript Linter
 
 ### Project file structure
@@ -88,21 +86,10 @@ Configure your virtualhost Url to feed browsersync (notes below).
  
 #### Virtualhost and Browsersync
 
-For Browsersync, you can configure your virtualhost URL either by using `src/config.json` file or by a `src/.env` file. The difference is that by using `.env` each member of your team can use different virtualhost Url's. If you don't need this feature, you can stick with the `config.json` option.
-
-Using `src/config.json`:
+For Browsersync, you can configure your virtualhost URL either by using `src/config.json` file.
 
 * Create your virtual domain using your local hosts file (for OSX it's in /etc/hosts)
 * Change `devUrl` variable in the config file with your virtual domain
-
-
-Using `src/.env`:
-
-* Copy the `src/.env.example` file to a new file and name it `.env`
-    
-* Open the `src/.env` file and change the `DEV_URL` variable
-
-* In `src/gulpfile.js`, in the `watch` task (l:103) change the `proxy` setting to `process.env.DEV_URL` instead of `config.devUrl`
 
 
 ## Use it
