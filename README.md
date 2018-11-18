@@ -114,10 +114,6 @@ Build for production:
 
     $ gulp build --prod
 
-Run [JSHint](http://jshint.com/) 
-
-    $ gulp --lintjs
-
 ## Acknowledgements 
 
 This project is influenced by similar projects such as:

@@ -16,7 +16,7 @@ Icon
 node_modules
 vendor
 .sass-cache
-/public/assets
+/public/dist
 
 nbproject
 .vscode

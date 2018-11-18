@@ -1,6 +1,9 @@
-var clean = require('gulp-clean');
+const gulp = require('gulp');
+const del = require('del');
+const config = require('../config.json');
 
-gulp.task('clean', function () {
-	return gulp.src(paths.dist, {read: false} )
-        .pipe(clean({force: true}));
+// ### Clean
+// `gulp clean` - Deletes the build folder entirely.
+gulp.task('clean', () => {
+  del.bind(null, [config.paths.dist], { force: true });
 });

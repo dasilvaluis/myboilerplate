@@ -24,5 +24,16 @@
   },
   "watch": [
     "./public/**/*.html"
-  ]
+  ],
+  "zip": {
+    "name": "myboilerplate.zip",
+    "files": [
+      "./**/*",
+      "!./.git",
+      "!./.gitignore",
+      "!./src/**",
+      "!./node_modules/**"
+    ],
+    "dest": "../"
+  }
 }

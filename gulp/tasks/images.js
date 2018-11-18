@@ -1,11 +1,18 @@
-var imagemin = require('gulp-imagemin');
+const gulp = require('gulp');
+const imagemin = require('gulp-imagemin');
+const browserSync = require('browser-sync');
+const config = require('../config.json');
 
-gulp.task('images', function () {
-    gulp.src(deps.images)
-        .pipe(gulpif(prod, imagemin({
-            optimizationLevel: 5,
-            progressive: true,
-            interlaced: true
-        })))
-        .pipe(finalize('images'));
+// ### Images
+// `gulp images` - Run lossless compression on all the images.
+gulp.task('images', () => {
+  const output = gulp.src(config.dependencies.images)
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{ removeUnknownsAndDefaults: false }, { cleanupIDs: false }]
+    }))
+    .pipe(gulp.dest(`${config.paths.dist}/images`))
+    .pipe(browserSync.stream());
+  return output;
 });
