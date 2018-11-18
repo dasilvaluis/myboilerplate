@@ -23,4 +23,4 @@ global.finalize = function (directory) {
         .pipe(browserSync.stream)();
 };
 
-require('require-dir')('./gulp-tasks');
+require('require-dir')('./gulp/tasks');
