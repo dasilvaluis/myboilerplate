@@ -7,7 +7,6 @@ const eslint = require('gulp-eslint');
 const lazypipe = require('lazypipe');
 const browserSync = require('browser-sync');
 const config = require('../config.json');
-const enabled = require('../enabled.js');
 
 // ### JS processing pipeline
 // Example
