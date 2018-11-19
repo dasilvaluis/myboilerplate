@@ -1,12 +1,13 @@
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const uglify = require('gulp-uglify');
-const sourcemaps = require('gulp-sourcemaps');
-const concat = require('gulp-concat');
-const eslint = require('gulp-eslint');
-const lazypipe = require('lazypipe');
-const browserSync = require('browser-sync');
-const config = require('../config.json');
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import uglify from 'gulp-uglify';
+import sourcemaps from 'gulp-sourcemaps';
+import concat from 'gulp-concat';
+import eslint from 'gulp-eslint';
+import lazypipe from 'lazypipe';
+import browserSync from 'browser-sync';
+import config from '../config.json';
+import enabled from '../enabled.js';
 
 // ### JS processing pipeline
 // Example
