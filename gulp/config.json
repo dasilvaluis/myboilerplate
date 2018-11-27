@@ -4,7 +4,7 @@
       "./src/scripts/main.js"
     ],
     "css": [
-      "node_modules/normalize.css/normalize.css",
+      "./node_modules/normalize.css/normalize.css",
       "./src/styles/main.scss"
     ],
     "fonts": [
